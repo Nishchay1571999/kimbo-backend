@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { createPrismaClient } from '../dist/prisma/prisma-client.js';
+import { createPrismaClient } from '../dist/common/database/prisma-client.js';
 
 let failed = false;
 for (const name of ['DATABASE_URL', 'DIRECT_URL']) {

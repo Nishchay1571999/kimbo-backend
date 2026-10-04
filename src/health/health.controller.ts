@@ -4,7 +4,7 @@ import {
   Header,
   ServiceUnavailableException,
 } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service.js';
+import { PrismaService } from '../common/database/prisma.service.js';
 
 @Controller('health')
 export class HealthController {

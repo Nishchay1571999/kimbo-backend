@@ -4,7 +4,7 @@ Nine PostgreSQL tables implement the agreed schema. Prisma models use camelCase;
 
 | Table | Responsibility |
 | --- | --- |
-| users | Stable guest/member ownership, optional auth-provider identity, timezone, onboarding completion |
+| users | Stable guest/member ownership, stable bearer identity, separate email/password credential hash, timezone, onboarding completion |
 | user_health_profiles | Required onboarding facts and immutable local wake/sleep times |
 | user_preferences | Preferred chat model, one row per user |
 | entities | Owned dated health events, category, media JSON, input revision, soft deletion |
@@ -16,7 +16,9 @@ Nine PostgreSQL tables implement the agreed schema. Prisma models use camelCase;
 
 ## Identity and onboarding
 
-Guest registration updates the existing user rather than copying its data. Email is nullable and unique; normalize it before persistence. An auth-provider identifier is not a session credential. Real authentication still needs a service and session validation.
+Guest registration updates the existing user rather than copying its data. Email is nullable and unique; normalize it before persistence. `auth_provider_id` is the stable bearer value: new guest/member accounts receive random UUIDs. Guest conversion preserves this value and the user's ID, onboarding state and all ownership. `password_hash` separately stores a salted scrypt hash of the normalized email and exact password encoded as a JSON array. It is never returned to clients. Existing member credential hashes are backfilled into the new column while their previous bearer values remain unchanged for compatibility.
+
+Member creation requires email and password; sign-in verifies `password_hash` and returns the existing `auth_provider_id` as `token`. Guests have null name, email and password hash, but receive a UUID token. Passing that UUID as `authProviderId` to account creation atomically updates only the matching guest, subject to unique normalized email. No email verification or external identity provider is used. Protected product requests must validate the bearer value; expiry and revocation remain separate concerns.
 
 Complete onboarding in one transaction: create the health profile, preferences and initial weight observation, then set users.onboarding_completed_at. Gate product operations on that timestamp in the backend. Onboarding drafts remain local. Age is stored with its recording date; no birth date is invented. Height is centimeters and weight kilograms. Initial profile weight is a snapshot; current weight comes from the latest applicable non-void weight observation.
 

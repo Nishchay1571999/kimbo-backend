@@ -83,3 +83,55 @@ pnpm run start:prod
 ```
 
 Unit and HTTP tests do not require live database access; the HTTP test replaces `PrismaService`. `db:check` is the explicit live integration check and never changes database data or schema. It tests both env URLs and reports connection errors without printing credentials.
+
+## Accounts, guests, and sign-in
+
+`POST /v1/accounts/continue-as-guest` accepts `{}` or an optional IANA `timezone`.
+It creates a guest with null name, email and password hash, incomplete onboarding,
+and a random UUID `auth_provider_id`. Timezone defaults to `Asia/Kolkata`.
+The HTTP 201 response contains account fields plus `auth_provider_id`, `token` (the same UUID), and `tokenType: "Bearer"`.
+Store that token to identify the guest during registration.
+
+`POST /v1/accounts` creates a member with email and password. Email is trimmed and
+lowercased; password is preserved exactly and must contain 7–128 characters.
+Optional name is trimmed and must contain 1–100 characters when provided.
+Timezone is required and must be a valid IANA name such as `Asia/Kolkata` or `UTC`.
+
+Include the guest token as `auth_provider_id` (or camelCase `authProviderId`) to convert the existing guest:
+
+```json
+{"auth_provider_id":"guest-uuid-from-response","name":"guest test","email":"guest-test@email.com","password":"test123","timezone":"Asia/Kolkata"}
+```
+
+Conversion updates that guest in place, sets member status and stores the
+email/password hash. Its user ID, UUID token, onboarding and owned rows are
+preserved. An occupied normalized email returns HTTP 409 `EMAIL_ALREADY_EXISTS`,
+including database uniqueness races. A missing or already-converted guest returns
+HTTP 401 `INVALID_GUEST_TOKEN`; a member cannot be overwritten using this flow.
+Unknown request fields and malformed UUIDs are rejected. The existing account
+creation behavior with omitted email/password remains available, but the dedicated
+guest endpoint returns the token needed for later conversion.
+
+Credential hashes live in `users.password_hash`; tokens live in
+`users.auth_provider_id`. New accounts receive UUID tokens, while migration
+preserves existing tokens and backfills existing scrypt credentials. Password
+hashes and plaintext passwords are excluded from account responses.
+
+`POST /v1/accounts/sign-in` accepts email and password, verifies `password_hash`,
+and returns the public account fields plus `token` (the unchanged auth provider
+value) and `tokenType: "Bearer"`. The client can send
+`Authorization: Bearer <token>` on subsequent requests. Unknown accounts and
+incorrect passwords return HTTP 401 `INVALID_CREDENTIALS`. Bearer validation must
+be applied to protected product routes. Tokens currently have no expiry or
+revocation. No external identity provider or email verification is used.
+
+Invalid input returns HTTP 400. Business validation codes include `INVALID_EMAIL`,
+`INVALID_PASSWORD`, `INVALID_NAME`, `EMAIL_REQUIRED` and `INVALID_TIMEZONE`.
+Unexpected database errors return HTTP 500 without exposing database details.
+Onboarding remains a separate transaction.
+
+The identity feature wires controller → use case → repository contract → Prisma
+adapter. Use cases have no Prisma dependency. Credential hashing has its own
+small port and scrypt adapter. Shared database lifecycle code lives in
+`src/common/database`. Unit and HTTP tests cover validation, hashing, guest
+conversion, sign-in and error mapping; live checks use the configured `.env` DB.

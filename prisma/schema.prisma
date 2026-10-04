@@ -94,6 +94,7 @@ model User {
   name                  String?       @db.VarChar(100)
   email                 String?       @unique @db.VarChar(320)
   authProviderId        String?       @unique @map("auth_provider_id") @db.VarChar(255)
+  passwordHash          String?       @map("password_hash") @db.VarChar(255)
   accountStatus         AccountStatus @default(guest) @map("account_status")
   timezone              String        @default("Asia/Kolkata") @db.VarChar(100)
   onboardingCompletedAt DateTime?     @map("onboarding_completed_at") @db.Timestamptz(3)
