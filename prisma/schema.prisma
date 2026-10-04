@@ -7,3 +7,279 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum AccountStatus {
+  guest
+  member
+}
+
+enum Gender {
+  male
+  female
+  unspecified
+}
+
+enum GoalIntention {
+  lose
+  maintain
+  gain
+}
+
+enum ExerciseFrequency {
+  never
+  once_or_twice
+  four_to_five_plus
+}
+
+enum HealthyEatingFrequency {
+  not_so_much
+  most_of_the_time
+  every_time
+}
+
+enum EntityTag {
+  note
+  nutrition
+  exercise
+}
+
+enum InputSource {
+  text
+  image
+  audio
+  mixed
+}
+
+enum AiStatus {
+  not_requested
+  pending
+  processing
+  completed
+  failed
+}
+
+enum HealthMetric {
+  weight
+  calories_intake
+  calories_burned
+}
+
+enum HealthRecordSource {
+  user
+  extracted
+  calculated
+}
+
+enum ThreadStatus {
+  active
+  archived
+  deleted
+}
+
+enum MessageRole {
+  user
+  assistant
+}
+
+enum MessageStatus {
+  pending
+  processing
+  completed
+  failed
+  cancelled
+}
+
+model User {
+  id                    String        @id @default(uuid()) @db.Uuid
+  name                  String?       @db.VarChar(100)
+  email                 String?       @unique @db.VarChar(320)
+  authProviderId        String?       @unique @map("auth_provider_id") @db.VarChar(255)
+  accountStatus         AccountStatus @default(guest) @map("account_status")
+  timezone              String        @default("Asia/Kolkata") @db.VarChar(100)
+  onboardingCompletedAt DateTime?     @map("onboarding_completed_at") @db.Timestamptz(3)
+  createdAt             DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt             DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+
+  healthProfile UserHealthProfile?
+  preferences   UserPreferences?
+  entities      Entity[]
+  healthRecords HealthRecord[]
+  chatThreads   ChatThread[]
+
+  @@map("users")
+}
+
+model UserHealthProfile {
+  userId                 String                 @id @map("user_id") @db.Uuid
+  heightCm               Decimal                @map("height_cm") @db.Decimal(6, 2)
+  /// Initial measurement only; current weight is derived from health_records.
+  initialWeightKg        Decimal                @map("initial_weight_kg") @db.Decimal(6, 2)
+  ageAtOnboarding        Int                    @map("age_at_onboarding")
+  ageRecordedOn          DateTime               @map("age_recorded_on") @db.Date
+  gender                 Gender
+  goalIntention          GoalIntention          @map("goal_intention")
+  exerciseFrequency      ExerciseFrequency      @map("exercise_frequency")
+  healthyEatingFrequency HealthyEatingFrequency @map("healthy_eating_frequency")
+  /// Local wall-clock times. SQL prevents subsequent schedule changes.
+  defaultWakeTime        DateTime               @map("default_wake_time") @db.Time(0)
+  defaultSleepTime       DateTime               @map("default_sleep_time") @db.Time(0)
+  createdAt              DateTime               @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt              DateTime               @updatedAt @map("updated_at") @db.Timestamptz(3)
+  user                   User                   @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@map("user_health_profiles")
+}
+
+model UserPreferences {
+  userId               String   @id @map("user_id") @db.Uuid
+  preferredChatModelId String?  @map("preferred_chat_model_id") @db.Uuid
+  createdAt            DateTime @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt            DateTime @updatedAt @map("updated_at") @db.Timestamptz(3)
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Restrict)
+  preferredChatModel   AiModel? @relation(fields: [preferredChatModelId], references: [id], onDelete: SetNull)
+
+  @@map("user_preferences")
+}
+
+model Entity {
+  entityId           String           @id @default(uuid()) @map("entity_id") @db.Uuid
+  userId             String           @map("user_id") @db.Uuid
+  tag                EntityTag
+  entryDate          DateTime         @map("entry_date") @db.Date
+  occurredAt         DateTime         @map("occurred_at") @db.Timestamptz(3)
+  recordedTimezone   String           @map("recorded_timezone") @db.VarChar(100)
+  inputSource        InputSource      @map("input_source")
+  /// Array of attachment IDs, types, storage keys, MIME types and media metadata.
+  entityAttachments  Json             @default("[]") @map("entity_attachments") @db.JsonB
+  entityTagDetailsId String           @unique @map("entity_tag_details_id") @db.Uuid
+  revision           Int              @default(1)
+  createdAt          DateTime         @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt          DateTime         @updatedAt @map("updated_at") @db.Timestamptz(3)
+  deletedAt          DateTime?        @map("deleted_at") @db.Timestamptz(3)
+  user               User             @relation(fields: [userId], references: [id], onDelete: Restrict)
+  details            EntityTagDetails @relation(fields: [entityTagDetailsId], references: [id], onDelete: Restrict)
+  healthRecords      HealthRecord[]
+
+  @@unique([entityId, userId])
+  @@index([userId, entryDate(sort: Desc), occurredAt(sort: Desc)])
+  @@index([userId, tag, entryDate(sort: Desc)])
+  @@map("entities")
+}
+
+model EntityTagDetails {
+  id                String    @id @default(uuid()) @db.Uuid
+  title             String    @db.VarChar(100)
+  note              String?
+  /// Confirmed category-specific facts, never unreviewed AI proposals.
+  tagData           Json      @default("{}") @map("tag_data") @db.JsonB
+  aiSynopsis        String?   @map("ai_synopsis")
+  audioTranscripts  Json?     @map("audio_transcripts") @db.JsonB
+  aiStructuredData  Json?     @map("ai_structured_data") @db.JsonB
+  aiStatus          AiStatus  @default(not_requested) @map("ai_status")
+  aiInputRevision   Int?      @map("ai_input_revision")
+  aiModelId         String?   @map("ai_model_id") @db.Uuid
+  aiPipelineVersion String?   @map("ai_pipeline_version") @db.VarChar(100)
+  aiAttemptCount    Int       @default(0) @map("ai_attempt_count")
+  aiNextAttemptAt   DateTime? @map("ai_next_attempt_at") @db.Timestamptz(3)
+  aiLockedUntil     DateTime? @map("ai_locked_until") @db.Timestamptz(3)
+  aiErrorCode       String?   @map("ai_error_code") @db.VarChar(100)
+  aiCompletedAt     DateTime? @map("ai_completed_at") @db.Timestamptz(3)
+  createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz(3)
+  entity            Entity?
+  aiModel           AiModel?  @relation(fields: [aiModelId], references: [id], onDelete: Restrict)
+
+  @@index([aiStatus, aiNextAttemptAt])
+  @@map("entity_tag_details")
+}
+
+/// Append-only observations. Corrections append a replacement or void record.
+model HealthRecord {
+  id                 String             @id @default(uuid()) @db.Uuid
+  userId             String             @map("user_id") @db.Uuid
+  metricType         HealthMetric       @map("metric_type")
+  value              Decimal            @db.Decimal(12, 3)
+  unit               String             @db.VarChar(10)
+  occurredAt         DateTime           @map("occurred_at") @db.Timestamptz(3)
+  sourceEntityId     String?            @map("source_entity_id") @db.Uuid
+  sourceRevision     Int?               @map("source_revision")
+  source             HealthRecordSource
+  supersedesRecordId String?            @unique @map("supersedes_record_id") @db.Uuid
+  /// A void record supersedes an observation without contributing a value.
+  isVoid             Boolean            @default(false) @map("is_void")
+  createdAt          DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  user               User               @relation(fields: [userId], references: [id], onDelete: Restrict)
+  sourceEntity       Entity?            @relation(fields: [sourceEntityId, userId], references: [entityId, userId], onDelete: Restrict)
+  supersedes         HealthRecord?      @relation("HealthCorrections", fields: [supersedesRecordId], references: [id], onDelete: Restrict)
+  supersededBy       HealthRecord?      @relation("HealthCorrections")
+
+  @@unique([sourceEntityId, sourceRevision, metricType])
+  @@index([userId, metricType, occurredAt(sort: Desc)])
+  @@map("health_records")
+}
+
+model AiModel {
+  id                  String             @id @default(uuid()) @db.Uuid
+  name                String             @db.VarChar(100)
+  provider            String             @default("openrouter") @db.VarChar(50)
+  providerModelId     String             @map("provider_model_id") @db.VarChar(255)
+  /// Reference to server configuration only; never a provider secret.
+  credentialReference String?            @map("credential_reference") @db.VarChar(100)
+  supportsText        Boolean            @default(true) @map("supports_text")
+  supportsImages      Boolean            @default(false) @map("supports_images")
+  supportsAudio       Boolean            @default(false) @map("supports_audio")
+  isAvailable         Boolean            @default(true) @map("is_available")
+  createdAt           DateTime           @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt           DateTime           @updatedAt @map("updated_at") @db.Timestamptz(3)
+  preferences         UserPreferences[]
+  threads             ChatThread[]
+  messages            ChatMessage[]
+  entityInsights      EntityTagDetails[]
+
+  @@unique([provider, providerModelId])
+  @@map("ai_models")
+}
+
+model ChatThread {
+  id           String        @id @default(uuid()) @db.Uuid
+  userId       String        @map("user_id") @db.Uuid
+  aiModelId    String        @map("ai_model_id") @db.Uuid
+  title        String?       @db.VarChar(200)
+  threadStatus ThreadStatus  @default(active) @map("thread_status")
+  createdAt    DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+  deletedAt    DateTime?     @map("deleted_at") @db.Timestamptz(3)
+  user         User          @relation(fields: [userId], references: [id], onDelete: Restrict)
+  aiModel      AiModel       @relation(fields: [aiModelId], references: [id], onDelete: Restrict)
+  messages     ChatMessage[]
+
+  @@index([userId, updatedAt(sort: Desc)])
+  @@map("chat_threads")
+}
+
+model ChatMessage {
+  id               String        @id @default(uuid()) @db.Uuid
+  threadId         String        @map("thread_id") @db.Uuid
+  message          String        @default("")
+  role             MessageRole
+  status           MessageStatus @default(pending)
+  sequenceNumber   Int           @map("sequence_number")
+  requestId        String        @map("request_id") @db.Uuid
+  replyToMessageId String?       @map("reply_to_message_id") @db.Uuid
+  actualModelId    String?       @map("actual_model_id") @db.Uuid
+  /// Source entity/record IDs and revisions, plus optional retrieval function names.
+  metadata         Json          @default("{}") @db.JsonB
+  errorCode        String?       @map("error_code") @db.VarChar(100)
+  createdAt        DateTime      @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt        DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
+  completedAt      DateTime?     @map("completed_at") @db.Timestamptz(3)
+  thread           ChatThread    @relation(fields: [threadId], references: [id], onDelete: Restrict)
+  actualModel      AiModel?      @relation(fields: [actualModelId], references: [id], onDelete: Restrict)
+  replyTo          ChatMessage?  @relation("MessageReplies", fields: [replyToMessageId, threadId], references: [id, threadId], onDelete: Restrict, onUpdate: Restrict)
+  replies          ChatMessage[] @relation("MessageReplies")
+
+  @@unique([id, threadId])
+  @@unique([threadId, sequenceNumber])
+  @@unique([threadId, requestId, role])
+  @@map("chat_messages")
+}
