@@ -11,6 +11,7 @@ export function createPrismaClient(connectionString: string): PrismaClient {
     connectionString,
     max: 5,
     connectionTimeoutMillis: 10_000,
+    query_timeout: 5_000,
     idleTimeoutMillis: 30_000,
     // Verify certificates by default; explicit URL SSL settings take precedence.
     ssl: { rejectUnauthorized: true },

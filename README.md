@@ -19,7 +19,15 @@ Environment variables supplied by the hosting platform take precedence over `.en
 
 The example uses `sslmode=require&uselibpqcompat=true`, which requires encrypted TLS but does **not** verify the server certificate. This accommodates Supabase's private certificate authority. For production, download the CA certificate from Supabase Dashboard → Database Settings and replace the query parameters in both URLs with `sslmode=verify-full&sslrootcert=./certs/supabase-ca.crt`. Provision that file at the same path on the host; URL-encode paths containing special characters. See [Supabase SSL configuration](https://supabase.com/docs/guides/database/connecting-to-postgres#ssl).
 
-`PrismaModule` exports one `PrismaService` per Nest application. It uses the PostgreSQL driver adapter with a maximum of five connections, a ten-second connection timeout, and a thirty-second idle timeout. Startup performs `SELECT 1` so invalid credentials fail immediately. Application shutdown closes the pool.
+`PrismaModule` exports one `PrismaService` per Nest application. It uses the PostgreSQL driver adapter with a maximum of five connections, a ten-second connection timeout, a five-second client query timeout, and a thirty-second idle timeout. Startup performs `SELECT 1` so invalid credentials fail immediately. Application shutdown closes the pool. The client query timeout limits how long the client waits; it does not guarantee server-side query cancellation. Adjust it if future workloads need longer queries.
+
+## Health checks
+
+- `GET /health/live` returns HTTP 200 with `{ "status": "ok" }` when the HTTP server is running. It does not query the database, so a database outage does not trigger liveness restarts.
+- `GET /health` executes a read-only `SELECT 1` through the shared Prisma client. It returns HTTP 200 with `{ "status": "ok", "database": "up" }`, or HTTP 503 with `{ "status": "error", "database": "down" }`. It never returns driver errors or credentials. Both endpoints disable response caching.
+- `pnpm run health:check` builds, starts a temporary real Nest server on an available loopback port, checks both endpoints against Supabase, then shuts down the server and pool.
+
+Use `/health/live` for liveness and `/health` for readiness in hosting or container probes. Startup still requires a successful database connection.
 
 Import `PrismaModule` into a feature module and inject `PrismaService`. Use `prisma.client` for queries. For example, in an injected service method:
 
@@ -66,6 +74,7 @@ pnpm run lint
 pnpm test
 pnpm run test:e2e
 pnpm run db:check
+pnpm run health:check
 
 pnpm run build
 pnpm run start:prod
