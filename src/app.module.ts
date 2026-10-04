@@ -8,6 +8,10 @@ import { HealthModule } from './health/health.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
+const optionalModules = process.env.OBSERVE_ENABLED === 'true'
+  ? [ObserveModule]
+  : [];
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -15,11 +19,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     HealthModule,
     // Distributed tracing, auto-correlated logs, request/job metrics, error
     // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
-    ObserveModule.forRoot({
-      appKey: 'YOUR_APP_KEY',
-      appSecret: 'YOUR_APP_SECRET',
-      serviceId: 'kimbo-backend',
-    }),
+    ...optionalModules,
   ],
   controllers: [AppController],
   providers: [AppService],
