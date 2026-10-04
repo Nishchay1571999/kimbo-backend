@@ -13,6 +13,8 @@ Requires Node.js 20.19+ (or a supported newer LTS) and pnpm 10.
 
 Environment variables supplied by the hosting platform take precedence over `.env`. Keep the real env files out of source control.
 
+Docker copies the same `.env` into `/app` for Prisma generation, migration commands, and NestJS runtime configuration. No separate environment file is needed. The image contains these credentials; keep it in a private registry and rebuild it after changing `.env`. The container starts the compiled application with `pnpm run start:prod`.
+
 ## Database connections
 
 `DATABASE_URL` is used by the application, through Supabase's transaction pooler on port **6543**. `DIRECT_URL` is used by the Prisma CLI, through the session pooler on port **5432**, which works on IPv4 networks. Despite its variable name, this is a session pooler URL, not Supabase's IPv6 direct endpoint. See the [Supabase Prisma guide](https://supabase.com/docs/guides/database/prisma).

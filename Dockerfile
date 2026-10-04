@@ -28,11 +28,7 @@ RUN apt-get update -qq && \
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod=false
 
-# Generate Prisma Client
-COPY prisma .
-RUN npx prisma generate
-
-# Copy application code
+# Copy application code and the shared .env used by Prisma and NestJS
 COPY . .
 
 # Build application
@@ -52,4 +48,4 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "pnpm", "run", "start" ]
+CMD [ "pnpm", "run", "start:prod" ]

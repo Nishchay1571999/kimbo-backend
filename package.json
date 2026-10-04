@@ -27,8 +27,7 @@
     "prisma:status": "prisma migrate status",
     "prisma:studio": "prisma studio",
     "db:check": "pnpm run build && node scripts/check-database.mjs",
-    "health:check": "pnpm run build && node scripts/check-health.mjs",
-    "postinstall": "prisma generate"
+    "health:check": "pnpm run build && node scripts/check-health.mjs"
   },
   "dependencies": {
     "@nestjs/common": "^12.0.1",
