@@ -29,6 +29,10 @@
     "db:check": "pnpm run build && node scripts/check-database.mjs",
     "health:check": "pnpm run build && node scripts/check-health.mjs",
     "product:check": "pnpm run build && node scripts/check-product-flows.mjs",
+    "test:seed": "pnpm run build && node scripts/seed-test-account.mjs",
+    "chat:check": "pnpm run build && node scripts/check-chat-flows.mjs",
+    "chat:check-availability": "pnpm run build && node scripts/check-chat-availability.mjs",
+    "chat:check-deployed": "pnpm run build && node scripts/check-deployed-chat.mjs",
     "ai:configure": "pnpm run build && node scripts/configure-ai-models.mjs",
     "ai:check-models": "pnpm run build && node scripts/check-ai-models.mjs",
     "ai:check": "pnpm run build && node scripts/check-ai-flows.mjs",
@@ -42,6 +46,7 @@
     "@nestjs/observe": "^0.3.0",
     "@nestjs/passport": "^12.0.0",
     "@nestjs/platform-express": "^12.0.1",
+    "@openrouter/agent": "^0.11.0",
     "@prisma/adapter-pg": "7.10.0",
     "@prisma/client": "7.10.0",
     "argon2": "^0.45.1",
@@ -53,7 +58,8 @@
     "passport-jwt": "^4.0.1",
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.7.10",

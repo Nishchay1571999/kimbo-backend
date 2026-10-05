@@ -16,5 +16,6 @@ import { HomeController } from './presentation/home.controller.js';
       useClass: PrismaHealthProfileRepository,
     },
   ],
+  exports: [GetHomeUseCase, HEALTH_PROFILE_REPOSITORY],
 })
 export class HomeModule {}

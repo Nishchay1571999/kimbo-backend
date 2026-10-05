@@ -1,0 +1,45 @@
+{
+  "account": "test@email.com",
+  "fixture": "kimbo-dummy-v1",
+  "checkedAt": "2026-10-05T11:35:01.407Z",
+  "anchorDate": "2026-10-05",
+  "from": "2026-09-15",
+  "timezone": "Asia/Kolkata",
+  "created": {
+    "entries": 0,
+    "healthRecords": 0,
+    "threads": 0,
+    "messages": 0,
+    "profiles": 0
+  },
+  "counts": {
+    "activeEntries": 71,
+    "healthRecords": 74,
+    "threads": 3,
+    "messages": 14
+  },
+  "model": {
+    "id": "5771ebc7-5049-4987-90dd-01c547a8375d",
+    "providerModelId": "openai/gpt-4o-mini"
+  },
+  "today": {
+    "nutrition": {
+      "caloriesConsumedKcal": 1040,
+      "entryCount": 2
+    },
+    "exercise": {
+      "durationMinutes": 35,
+      "caloriesBurnedKcal": 180
+    }
+  },
+  "weekly": {
+    "daysInRange": 7,
+    "daysTracked": 6,
+    "daysWithNutrition": 6,
+    "caloriesConsumedKcal": 10900,
+    "averageCaloriesConsumedKcal": 1816.67,
+    "exerciseDurationMinutes": 105
+  },
+  "syntheticConversations": true,
+  "committed": true
+}

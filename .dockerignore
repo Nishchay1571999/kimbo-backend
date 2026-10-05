@@ -3,3 +3,8 @@
 .dockerignore
 Dockerfile
 fly.toml
+.env*
+/.aws
+/.agents
+/.codex
+/.claude

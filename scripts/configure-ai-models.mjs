@@ -10,6 +10,8 @@ try {
   for (const providerModelId of [
     'openai/gpt-4o-mini',
     'google/gemini-2.5-flash-lite',
+    'google/gemini-3.8-flash',
+    'openai/gpt-5.4-mini',
   ]) {
     const remote = data.find((model) => model.id === providerModelId);
     if (
@@ -44,6 +46,37 @@ try {
       },
     });
     console.log(JSON.stringify(model));
+  }
+  const chatPrimary = process.argv
+    .find((arg) => arg.startsWith('--test-chat-primary='))
+    ?.split('=')[1];
+  if (chatPrimary) {
+    const remote = data.find((model) => model.id === chatPrimary);
+    if (!remote?.supported_parameters?.includes('tools'))
+      throw new Error('Chat primary must support tools');
+    const model = await prisma.aiModel.findFirstOrThrow({
+      where: {
+        providerModelId: chatPrimary,
+        provider: 'openrouter',
+        isAvailable: true,
+        supportsText: true,
+      },
+    });
+    const user = await prisma.user.findUniqueOrThrow({
+      where: { email: 'test@email.com' },
+      select: { id: true },
+    });
+    await prisma.userPreferences.upsert({
+      where: { userId: user.id },
+      create: { userId: user.id, preferredChatModelId: model.id },
+      update: { preferredChatModelId: model.id },
+    });
+    console.log(
+      JSON.stringify({
+        account: 'test@email.com',
+        chatPrimary: model.providerModelId,
+      }),
+    );
   }
 } catch (error) {
   console.error(

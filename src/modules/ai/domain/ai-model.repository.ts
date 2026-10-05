@@ -9,6 +9,8 @@ export interface AllowedAiModel {
   supportsAudio: boolean;
 }
 export interface AiModelRepository {
+  selectForChat(userId: string): Promise<AllowedAiModel | null>;
+  findForChat(idOrProviderModelId: string): Promise<AllowedAiModel | null>;
   selectForEntry(
     userId: string,
     audio: boolean,

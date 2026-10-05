@@ -1,0 +1,157 @@
+{
+  "account": "test@email.com",
+  "checkedAt": "2026-10-05T13:11:27.802Z",
+  "scope": "Real PostgreSQL, bearer-authenticated HTTP, OpenRouter Agent SDK; controlled provider for fault injection only",
+  "checks": [
+    "Thread create/list/get/update; creation makes no provider call",
+    "Missing bearer rejected; identity spoofing rejected; unknown thread returns 404 (test account only)",
+    "Today answered from current context; real text deltas, actual model and source snapshots persisted",
+    "Same request replays exactly one saved pair without AI; changed content with same request ID returns 409",
+    "Historical day tool executed; date-specific snapshot and entry revisions persisted",
+    "Multi-step range → meals retrieval; missing-day-aware deterministic average",
+    "All six read-only tools exercised with the real OpenRouter Agent SDK",
+    "Real unavailable primary retries registered fallback; actual attribution recorded and thread selection preserved",
+    "New answers use edited values/revisions; deleted entries excluded; old source snapshots remain unchanged",
+    "Controlled provider error and timeout persist failed assistant rows",
+    "Concurrent same/different requests rejected; disconnect aborts generation and persists cancelled",
+    "Archived threads reject new messages; deleted threads are hidden"
+  ],
+  "conversations": [
+    {
+      "question": "How am I doing today? Use today’s supplied context, without historical tools.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [],
+      "sourceCount": 2,
+      "text": "Here is your summary for today (October 5, 2026):\n\n* **Nutrition:** You have logged 1,040 kcal across 2 meals:\n  * Breakfast: Oats, yogurt and banana (420 kcal)\n  * Lunch: Rice, dal and vegetables (620 kcal)\n* **Exercise:** 35 minutes of walking with an estimated expenditure of 180 kcal.\n* **Weight:** Recorded at 74.2 kg.\n* **Notes:** 1 check-in logged.\n\nKeep in mind that today may be only partially logged as the day progresses!"
+    },
+    {
+      "question": "How am I doing today? Use today’s supplied context, without historical tools.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [],
+      "sourceCount": 2,
+      "text": "Here is your summary for today (October 5, 2026):\n\n* **Nutrition:** You have logged 1,040 kcal across 2 meals:\n  * Breakfast: Oats, yogurt and banana (420 kcal)\n  * Lunch: Rice, dal and vegetables (620 kcal)\n* **Exercise:** 35 minutes of walking with an estimated expenditure of 180 kcal.\n* **Weight:** Recorded at 74.2 kg.\n* **Notes:** 1 check-in logged.\n\nKeep in mind that today may be only partially logged as the day progresses!"
+    },
+    {
+      "question": "Use get_day_health for 2026-10-04 and summarize my recorded nutrition and exercise that day.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [
+        "get_day_health"
+      ],
+      "sourceCount": 3,
+      "text": "For **October 4, 2026**, here is your recorded summary:\n\n* **Nutrition:** You consumed a total of **1,900 kcal** across 3 meals:\n  * **Breakfast:** Oats, yogurt and banana (510 kcal)\n  * **Lunch:** Rice, dal and vegetables (710 kcal)\n  * **Dinner:** Roti, paneer and salad (680 kcal)\n* **Exercise:** 0 minutes recorded; no calorie expenditure estimate is recorded."
+    },
+    {
+      "question": "Use get_health_range from 2026-09-29 through 2026-10-05. Then use get_entries to inspect nutrition on the highest-calorie day in that range. Explain what was logged and exclude missing days from the average.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [
+        "get_health_range",
+        "get_entries"
+      ],
+      "sourceCount": 4,
+      "text": "Across September 29 to October 5, 2026, September 29 had no nutrition logged. Excluding that missing day, your average intake across the 6 tracked days was **1,816.67 kcal/day**.\n\nThe highest-calorie day was **October 3, 2026**, with **2,560 kcal** across 4 meals:\n* **Breakfast:** Oats, yogurt and banana (480 kcal)\n* **Lunch:** Rice, dal and vegetables (680 kcal)\n* **Snack:** Pizza and ice cream (720 kcal)\n* **Dinner:** Roti, paneer and salad (680 kcal)"
+    },
+    {
+      "question": "Use get_week_health with anchorDate 2026-10-04 to summarize last calendar week.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [
+        "get_week_health"
+      ],
+      "sourceCount": 3,
+      "text": "For the calendar week of **September 28 to October 4, 2026**:\n\n* **Nutrition:** You tracked 6 out of 7 days (September 29 had no logs). Total intake was **11,640 kcal**, averaging **1,940 kcal/day** across logged days.\n* **Exercise:** You logged **70 total minutes** of activity with an estimated **360 kcal** burned (35 minutes / 180 kcal each on October 1 and October 3). The remaining days had 0 minutes recorded with no calorie expenditure estimates available."
+    },
+    {
+      "question": "Use get_month_health with anchorDate 2026-10-05 to summarize this month.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [
+        "get_month_health"
+      ],
+      "sourceCount": 3,
+      "text": "For **October 2026** so far (October 1–5, with today partially logged):\n\n* **Nutrition:** You have tracked all 5 days, totaling **9,000 kcal** consumed, with an average of **1,800 kcal/day**.\n* **Exercise:** You have logged **105 minutes** of activity across 3 active days (October 1, 3, and 5; 35 minutes each), totaling an estimated **540 kcal** burned. October 2 and 4 had 0 minutes logged with no calorie burn estimate recorded.\n* Dates from October 6 through October 31 have no recorded intake."
+    },
+    {
+      "question": "Use get_health_metric_history with metric weight from 2026-09-15 through 2026-10-05. Describe the recorded trend without diagnosing.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [
+        "get_health_metric_history"
+      ],
+      "sourceCount": 3,
+      "text": "Between September 15 and October 5, 2026, your recorded weight shows a steady downward trend:\n\n* **Sep 15:** 75.2 kg\n* **Sep 21:** 74.9 kg\n* **Sep 28:** 74.6 kg\n* **Oct 02:** 74.4 kg\n* **Oct 05:** 74.2 kg\n\nOverall, your active entries reflect a decrease of 1.0 kg across this three-week period."
+    },
+    {
+      "question": "Using only today context, summarize my logged calories in one sentence.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [],
+      "sourceCount": 2,
+      "text": "Today, you have logged 1,040 kcal consumed across two meals and an estimated 180 kcal burned from 35 minutes of exercise."
+    },
+    {
+      "question": "Use get_entries from 2026-10-04 through 2026-10-04, category nutrition. List the saved calorie values, including the Source retention fixture.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [
+        "get_entries"
+      ],
+      "sourceCount": 3,
+      "text": "Here are the saved nutrition entries and calorie values for October 4, 2026:\n\n* **[Dummy] Oats, yogurt and banana** (Breakfast): 510 kcal\n* **[Verification] Source retention fixture** (Snack): 510 kcal\n* **[Dummy] Rice, dal and vegetables** (Lunch): 710 kcal\n* **[Dummy] Roti, paneer and salad** (Dinner): 680 kcal"
+    },
+    {
+      "question": "Retrieve get_entries again for 2026-10-04, category nutrition. What is the saved value for the Source retention fixture now?",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [
+        "get_entries"
+      ],
+      "sourceCount": 3,
+      "text": "The saved value for the **[Verification] Source retention fixture** entry on 2026-10-04 is now **650 kcal** (revision 2)."
+    },
+    {
+      "question": "Use get_day_health for 2026-10-04. Summarize only the currently saved entries; the Source retention fixture has been deleted.",
+      "provider": "OpenRouter",
+      "terminalEvent": "message.completed",
+      "errorCode": null,
+      "toolCalls": [
+        "get_day_health"
+      ],
+      "sourceCount": 3,
+      "text": "For **October 4, 2026**, the currently saved entries are:\n\n* **Breakfast:** [Dummy] Oats, yogurt and banana – 510 kcal\n* **Lunch:** [Dummy] Rice, dal and vegetables – 710 kcal\n* **Dinner:** [Dummy] Roti, paneer and salad – 680 kcal\n\n**Daily Total:**\n* **Nutrition:** 3 entries totaling 1,900 kcal.\n* **Exercise:** 0 minutes recorded; no calorie expenditure estimate is recorded."
+    },
+    {
+      "question": "Controlled provider failure test",
+      "provider": "controlled fault injection",
+      "terminalEvent": "message.failed",
+      "errorCode": "AI_PROVIDER_ERROR",
+      "toolCalls": [],
+      "sourceCount": 2,
+      "text": ""
+    },
+    {
+      "question": "Controlled timeout test",
+      "provider": "controlled fault injection",
+      "terminalEvent": "message.failed",
+      "errorCode": "AI_TIMEOUT",
+      "toolCalls": [],
+      "sourceCount": 2,
+      "text": ""
+    }
+  ],
+  "threadId": "7f7d48b2-55f5-4224-9ef6-5b0ddd8293eb",
+  "passed": true
+}

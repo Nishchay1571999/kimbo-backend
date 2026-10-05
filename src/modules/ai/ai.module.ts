@@ -23,5 +23,6 @@ import { AnalysisWorker } from './infrastructure/analysis-worker.js';
     AnalyseEntryUseCase,
     AnalysisWorker,
   ],
+  exports: [AI_MODEL_REPOSITORY],
 })
 export class AiModule {}

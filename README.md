@@ -100,7 +100,13 @@ Timezone is required and must be a valid IANA name such as `Asia/Kolkata` or `UT
 Include the guest token as `auth_provider_id` (or camelCase `authProviderId`) to convert the existing guest:
 
 ```json
-{"auth_provider_id":"guest-uuid-from-response","name":"guest test","email":"guest-test@email.com","password":"test123","timezone":"Asia/Kolkata"}
+{
+  "auth_provider_id": "guest-uuid-from-response",
+  "name": "guest test",
+  "email": "guest-test@email.com",
+  "password": "test123",
+  "timezone": "Asia/Kolkata"
+}
 ```
 
 Conversion updates that guest in place, sets member status and stores the
@@ -143,6 +149,45 @@ AI worker are implemented. See [the product API contract](docs/product-api.md) f
 request examples, local test identity, Home semantics and provider configuration.
 Run `pnpm run product:check` for the opt-in live flow check against `test@email.com`;
 it creates and soft-deletes its own test entries.
+
+Run `pnpm run test:seed --date=2026-10-05` to populate the existing
+`test@email.com` account with dummy onboarding, three weeks of meals/exercise,
+five weight measurements, and three sample conversations. The seed reuses entry
+validation, repositories, Home calculations, and the shared Prisma client. It
+commits atomically, skips existing fixtures on reruns for the same date, preserves
+passwords/tokens and existing profile values, and does not invoke AI. Without
+`--date`, it uses the account's current local date. All meals and thread titles
+are marked `[Dummy]`; assistant metadata marks replies and retrieval snapshots
+as simulated, with no actual-model attribution. Entry analysis is not requested.
+The generated summary is saved to `docs/test-account-seed-verification.json`.
+
+Chat threads, durable messages, read-only health tools, source snapshots and
+NDJSON streaming are implemented using the existing tables and OpenRouter Agent
+SDK. See [the chat API contract](docs/chat-api.md) for request/event examples,
+pagination, idempotency and failure behavior.
+
+Run `pnpm run chat:check` for the opt-in live PostgreSQL/OpenRouter flow check,
+always using `test@email.com`. It creates verification threads, calls the real
+agent, checks streaming/replay/retrieval, and injects controlled failures and
+cancellation. Results are saved to `docs/chat-flow-verification.json`.
+Run `pnpm run chat:check-availability` for the smaller read-only availability,
+Home/Entries consistency and dummy-source provenance check; it saves
+`docs/chat-live-verification.json`. Cross-user access uses isolated HTTP tests,
+not another live account.
+
+Run `pnpm run chat:check-deployed` to verify the Fly deployment using the same
+test account. It checks API authentication, USDA search, thread pagination,
+real OpenRouter retrieval, persisted sources and retries, then soft-deletes
+its temporary verification thread. Fly supplies runtime credentials as secrets;
+local environment files are excluded from the Docker image.
+
+`pnpm run ai:configure --test-chat-primary=google/gemini-3.8-flash` registers
+models from OpenRouter's live catalog and updates only the test account's chat
+preference. Existing entry model selection is preserved. `CHAT_DEFAULT_MODEL`
+defaults to Gemini 3.8 Flash when registered; `CHAT_FALLBACK_MODEL` defaults to
+registered GPT-5.4 Mini (an empty value disables fallback). Model
+capability and provider privacy/routing settings can affect tool availability;
+an unavailable provider route produces a classified failed assistant message.
 
 Open Food Facts uses the same Nutrition APIs with `provider=open-food-facts`.
 Run `pnpm run nutrition:check-off` for the live barcode/search/entry/Home check.

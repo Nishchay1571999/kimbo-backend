@@ -1,5 +1,6 @@
 import {
   ConflictException,
+  BadRequestException,
   Inject,
   Injectable,
   NotFoundException,
@@ -112,6 +113,27 @@ export class PrismaEntryRepository implements EntryRepository {
         }),
       );
     });
+  }
+  async listRange(userId: string, from: string, to: string) {
+    const rows = await this.prisma.client.entity.findMany({
+      where: {
+        userId,
+        deletedAt: null,
+        entryDate: { gte: new Date(from), lte: new Date(to) },
+      },
+      include: { details: true },
+      orderBy: [
+        { entryDate: 'asc' },
+        { occurredAt: 'asc' },
+        { entityId: 'asc' },
+      ],
+      take: 1001,
+    });
+    if (rows.length > 1000)
+      throw new BadRequestException(
+        'Too many entries; retrieve a shorter period',
+      );
+    return rows.map(toEntryDto);
   }
   async delete(userId: string, id: string): Promise<void> {
     await this.prisma.client.$transaction(async (tx) => {

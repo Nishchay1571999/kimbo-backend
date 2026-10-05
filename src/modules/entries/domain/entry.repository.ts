@@ -4,6 +4,7 @@ export interface EntryRepository {
   create(userId: string, content: EntryContent): Promise<Entry>;
   get(userId: string, id: string): Promise<Entry | null>;
   list(userId: string, date: string): Promise<Entry[]>;
+  listRange(userId: string, from: string, to: string): Promise<Entry[]>;
   update(
     userId: string,
     id: string,

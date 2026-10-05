@@ -34,6 +34,8 @@ const actual = {
   providerModelId: 'actual-model',
 };
 const models = {
+  selectForChat: vi.fn(),
+  findForChat: vi.fn(),
   selectForEntry: vi.fn().mockResolvedValue(selected),
   findAllowed: vi.fn().mockResolvedValue(actual),
   list: vi.fn(),

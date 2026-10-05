@@ -28,11 +28,12 @@ RUN apt-get update -qq && \
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod=false
 
-# Copy application code and the shared .env used by Prisma and NestJS
+# Copy application code; runtime credentials are supplied by Fly secrets.
 COPY . .
 
 # Build application
-RUN pnpm run build
+# Prisma generation loads its datasource config but does not connect to a DB.
+RUN DIRECT_URL="postgresql://build:build@localhost:5432/build" pnpm run build
 
 
 # Final stage for app image

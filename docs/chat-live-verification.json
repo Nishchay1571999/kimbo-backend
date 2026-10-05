@@ -1,0 +1,85 @@
+{
+  "account": "test@email.com",
+  "checkedAt": "2026-10-05T13:13:11.797Z",
+  "scope": "Local compiled Nest server, live PostgreSQL, real account bearer authentication",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "authenticated": true,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/home?date=2026-10-05",
+      "authenticated": true,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/home",
+      "authenticated": false,
+      "status": 401,
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ai/models",
+      "authenticated": true,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries?date=2026-10-05",
+      "authenticated": true,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "method": "GET",
+      "path": "/v1/chat/threads",
+      "authenticated": true,
+      "status": 200,
+      "contentType": "application/json; charset=utf-8"
+    }
+  ],
+  "data": {
+    "timezone": "Asia/Kolkata",
+    "onboardingCompleted": true,
+    "activeEntries": 71,
+    "healthRecords": 74,
+    "threads": 14,
+    "messages": 56,
+    "latestEntryDate": "2026-10-05"
+  },
+  "fixtureChecks": {
+    "orderedRequestPairs": 7,
+    "assistantStatuses": {
+      "failed": 1,
+      "cancelled": 1,
+      "completed": 5
+    },
+    "sourceSnapshotsWithValidProvenance": 6,
+    "realProviderCalls": 0
+  },
+  "homeAvailable": true,
+  "authenticationEnforced": true,
+  "availableModelCount": 4,
+  "entriesAvailable": true,
+  "entriesOnLatestDate": 4,
+  "homeSummary": {
+    "nutrition": {
+      "caloriesConsumedKcal": 1040,
+      "entryCount": 2
+    },
+    "exercise": {
+      "durationMinutes": 35,
+      "caloriesBurnedKcal": 180
+    }
+  },
+  "homeMatchesSavedNutrition": true,
+  "chatRoutesAvailable": true
+}
