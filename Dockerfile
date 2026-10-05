@@ -33,7 +33,8 @@ COPY . .
 
 # Build application
 # Prisma generation loads its datasource config but does not connect to a DB.
-RUN DIRECT_URL="postgresql://build:build@localhost:5432/build" pnpm run build
+RUN DIRECT_URL="postgresql://build:build@localhost:5432/build" pnpm run build && \
+    node --input-type=module -e "await import('express'); await import('./dist/app.module.js')"
 
 
 # Final stage for app image

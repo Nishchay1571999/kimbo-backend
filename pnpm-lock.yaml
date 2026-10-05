@@ -50,6 +50,9 @@ importers:
       dotenv:
         specifier: ^18.0.5
         version: 18.0.5
+      express:
+        specifier: ^5.2.1
+        version: 5.2.1
       flyctl:
         specifier: ^1.2.11
         version: 1.2.11
