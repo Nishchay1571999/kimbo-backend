@@ -1,0 +1,4931 @@
+{
+  "account": "test@email.com",
+  "checkedAt": "2026-10-05T09:41:23.931Z",
+  "scope": "Live PostgreSQL and USDA; sleep profiles and successful AI output use rolled-back fixtures; OpenRouter adapter tested with fixtures",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "/v1/home?date=2026-10-05",
+      "status": 200,
+      "response": {
+        "date": "2026-10-05",
+        "timezone": "Asia/Kolkata",
+        "day": {
+          "label": "Today",
+          "weekday": "Monday",
+          "previous": "2026-10-04",
+          "next": "2026-10-06",
+          "isToday": true
+        },
+        "schedule": {
+          "wakeTime": null,
+          "sleepTime": null,
+          "crossesMidnight": false
+        },
+        "summary": {
+          "nutrition": {
+            "caloriesConsumedKcal": 0,
+            "entryCount": 0
+          },
+          "exercise": {
+            "durationMinutes": 0,
+            "caloriesBurnedKcal": null
+          }
+        },
+        "timeline": [],
+        "sections": [
+          {
+            "type": "nutrition_summary",
+            "data": {
+              "caloriesConsumedKcal": 0,
+              "entryCount": 0
+            }
+          },
+          {
+            "type": "exercise_summary",
+            "data": {
+              "durationMinutes": 0,
+              "caloriesBurnedKcal": null
+            }
+          },
+          {
+            "type": "timeline",
+            "data": {
+              "entries": [],
+              "startTime": null,
+              "endTime": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/ai/models",
+      "status": 200,
+      "response": [
+        {
+          "id": "5771ebc7-5049-4987-90dd-01c547a8375d",
+          "name": "OpenAI: GPT-4o-mini",
+          "provider": "openrouter",
+          "providerModelId": "openai/gpt-4o-mini",
+          "supportsText": true,
+          "supportsImages": true,
+          "supportsAudio": false
+        },
+        {
+          "id": "3b6f723f-9f92-429e-96af-c49b8f38a58d",
+          "name": "Google: Gemini 2.5 Flash Lite",
+          "provider": "openrouter",
+          "providerModelId": "google/gemini-2.5-flash-lite",
+          "supportsText": true,
+          "supportsImages": true,
+          "supportsAudio": true
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/nutrition/search?q=rice%20cooked",
+      "status": 200,
+      "response": {
+        "foods": [
+          {
+            "id": "usda:2708356",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708356",
+            "name": "Rice noodles, cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 107,
+              "proteinG": 1.78,
+              "carbohydratesG": 23.87,
+              "fatG": 0.2
+            }
+          },
+          {
+            "id": "usda:168914",
+            "provider": "usda-fdc",
+            "providerFoodId": "168914",
+            "name": "Rice noodles, cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 108,
+              "proteinG": 1.79,
+              "carbohydratesG": 24,
+              "fatG": 0.2
+            }
+          },
+          {
+            "id": "usda:2708402",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708402",
+            "name": "Rice, cooked, NFS",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 129,
+              "proteinG": 2.67,
+              "carbohydratesG": 27.99,
+              "fatG": 0.28
+            }
+          },
+          {
+            "id": "usda:2708416",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708416",
+            "name": "Rice, cooked, with milk",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 144,
+              "proteinG": 5.13,
+              "carbohydratesG": 25.01,
+              "fatG": 2.31
+            }
+          },
+          {
+            "id": "usda:168897",
+            "provider": "usda-fdc",
+            "providerFoodId": "168897",
+            "name": "Wild rice, cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 101,
+              "proteinG": 3.99,
+              "carbohydratesG": 21.3,
+              "fatG": 0.34
+            }
+          },
+          {
+            "id": "usda:2708422",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708422",
+            "name": "Rice, white, cooked, glutinous",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 96,
+              "proteinG": 2.01,
+              "carbohydratesG": 20.97,
+              "fatG": 0.19
+            }
+          },
+          {
+            "id": "usda:2710789",
+            "provider": "usda-fdc",
+            "providerFoodId": "2710789",
+            "name": "Rice, brown, cooked, as ingredient",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 124,
+              "proteinG": 2.45,
+              "carbohydratesG": 25.89,
+              "fatG": 1.12
+            }
+          },
+          {
+            "id": "usda:2709032",
+            "provider": "usda-fdc",
+            "providerFoodId": "2709032",
+            "name": "Rice, cooked with coconut milk",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 267,
+              "proteinG": 3.57,
+              "carbohydratesG": 26.55,
+              "fatG": 17.23
+            }
+          },
+          {
+            "id": "usda:2708417",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708417",
+            "name": "Rice, sweet, cooked with honey",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 139,
+              "proteinG": 2.52,
+              "carbohydratesG": 31.12,
+              "fatG": 0.26
+            }
+          },
+          {
+            "id": "usda:2710788",
+            "provider": "usda-fdc",
+            "providerFoodId": "2710788",
+            "name": "Rice, white, cooked, as ingredient",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 130,
+              "proteinG": 2.54,
+              "carbohydratesG": 28.98,
+              "fatG": 0.37
+            }
+          },
+          {
+            "id": "usda:2708404",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708404",
+            "name": "Rice, white, cooked, made with oil",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 151,
+              "proteinG": 2.6,
+              "carbohydratesG": 27.19,
+              "fatG": 3.12
+            }
+          },
+          {
+            "id": "usda:2708408",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708408",
+            "name": "Rice, white, cooked, no added fat",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 129,
+              "proteinG": 2.67,
+              "carbohydratesG": 27.99,
+              "fatG": 0.28
+            }
+          },
+          {
+            "id": "usda:2708403",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708403",
+            "name": "Rice, white, cooked, NS as to fat",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 129,
+              "proteinG": 2.67,
+              "carbohydratesG": 27.99,
+              "fatG": 0.28
+            }
+          },
+          {
+            "id": "usda:2708406",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708406",
+            "name": "Rice, white, cooked, made with margarine",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 142,
+              "proteinG": 2.6,
+              "carbohydratesG": 27.22,
+              "fatG": 2.12
+            }
+          },
+          {
+            "id": "usda:2708405",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708405",
+            "name": "Rice, white, cooked, made with butter",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 147,
+              "proteinG": 2.62,
+              "carbohydratesG": 27.2,
+              "fatG": 2.61
+            }
+          },
+          {
+            "id": "usda:2708411",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708411",
+            "name": "Rice, brown, cooked, made with butter",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 137,
+              "proteinG": 2.4,
+              "carbohydratesG": 25.16,
+              "fatG": 3
+            }
+          },
+          {
+            "id": "usda:2708412",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708412",
+            "name": "Rice, brown, cooked, made with margarine",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 134,
+              "proteinG": 2.38,
+              "carbohydratesG": 25.18,
+              "fatG": 2.6
+            }
+          },
+          {
+            "id": "usda:2708414",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708414",
+            "name": "Rice, brown, cooked, no added fat",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 123,
+              "proteinG": 2.43,
+              "carbohydratesG": 25.76,
+              "fatG": 1.11
+            }
+          },
+          {
+            "id": "usda:2708409",
+            "provider": "usda-fdc",
+            "providerFoodId": "2708409",
+            "name": "Rice, brown, cooked, NS as to fat",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 123,
+              "proteinG": 2.44,
+              "carbohydratesG": 25.76,
+              "fatG": 1.11
+            }
+          },
+          {
+            "id": "usda:169711",
+            "provider": "usda-fdc",
+            "providerFoodId": "169711",
+            "name": "Rice, white, glutinous, unenriched, cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 97,
+              "proteinG": 2.02,
+              "carbohydratesG": 21.1,
+              "fatG": 0.19
+            }
+          }
+        ],
+        "page": 1,
+        "totalPages": 3217,
+        "totalHits": 64334
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/nutrition/foods/2708356",
+      "status": 200,
+      "response": {
+        "id": "usda:2708356",
+        "provider": "usda-fdc",
+        "providerFoodId": "2708356",
+        "name": "Rice noodles, cooked",
+        "reference": {
+          "quantity": 100,
+          "unit": "g"
+        },
+        "nutrition": {
+          "caloriesKcal": 107,
+          "proteinG": 1.78,
+          "carbohydratesG": 23.9,
+          "fatG": 0.2
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/nutrition/calculate",
+      "status": 200,
+      "request": {
+        "providerFoodId": "2708356",
+        "quantity": 150,
+        "unit": "g"
+      },
+      "response": {
+        "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+        "name": "Rice noodles, cooked",
+        "quantity": 150,
+        "unit": "g",
+        "caloriesKcal": 160.5,
+        "proteinG": 2.67,
+        "carbohydratesG": 35.85,
+        "fatG": 0.3,
+        "quantitySource": "user_entered",
+        "nutritionSource": "reference",
+        "reference": {
+          "provider": "usda-fdc",
+          "providerFoodId": "2708356",
+          "amount": 100,
+          "unit": "g"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/nutrition/search?q=chicken%20breast%20cooked",
+      "status": 200,
+      "response": {
+        "foods": [
+          {
+            "id": "usda:171514",
+            "provider": "usda-fdc",
+            "providerFoodId": "171514",
+            "name": "Chicken breast tenders, breaded, cooked, microwaved",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 252,
+              "proteinG": 16.4,
+              "carbohydratesG": 17.6,
+              "fatG": 12.9
+            }
+          },
+          {
+            "id": "usda:2705953",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705953",
+            "name": "Chicken breast, NS as to cooking method, skin eaten",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 175,
+              "proteinG": 26.37,
+              "carbohydratesG": 0.09,
+              "fatG": 7.67
+            }
+          },
+          {
+            "id": "usda:2705954",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705954",
+            "name": "Chicken breast, NS as to cooking method, skin not eaten",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 144,
+              "proteinG": 28.04,
+              "carbohydratesG": 0,
+              "fatG": 3.57
+            }
+          },
+          {
+            "id": "usda:171075",
+            "provider": "usda-fdc",
+            "providerFoodId": "171075",
+            "name": "Chicken, broilers or fryers, breast, meat and skin, cooked, roasted",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 197,
+              "proteinG": 29.8,
+              "carbohydratesG": 0,
+              "fatG": 7.78
+            }
+          },
+          {
+            "id": "usda:171076",
+            "provider": "usda-fdc",
+            "providerFoodId": "171076",
+            "name": "Chicken, broilers or fryers, breast, meat and skin, cooked, stewed",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 184,
+              "proteinG": 27.4,
+              "carbohydratesG": 0,
+              "fatG": 7.42
+            }
+          },
+          {
+            "id": "usda:171078",
+            "provider": "usda-fdc",
+            "providerFoodId": "171078",
+            "name": "Chicken, broilers or fryers, breast, meat only, cooked, fried",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 187,
+              "proteinG": 33.4,
+              "carbohydratesG": 0.51,
+              "fatG": 4.71
+            }
+          },
+          {
+            "id": "usda:171477",
+            "provider": "usda-fdc",
+            "providerFoodId": "171477",
+            "name": "Chicken, broilers or fryers, breast, meat only, cooked, roasted",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 165,
+              "proteinG": 31,
+              "carbohydratesG": 0,
+              "fatG": 3.57
+            }
+          },
+          {
+            "id": "usda:171478",
+            "provider": "usda-fdc",
+            "providerFoodId": "171478",
+            "name": "Chicken, broilers or fryers, breast, meat only, cooked, stewed",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 151,
+              "proteinG": 29,
+              "carbohydratesG": 0,
+              "fatG": 3.03
+            }
+          },
+          {
+            "id": "usda:2705957",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705957",
+            "name": "Chicken breast, baked or broiled, skin eaten, from pre-cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 175,
+              "proteinG": 26.37,
+              "carbohydratesG": 0.09,
+              "fatG": 7.67
+            }
+          },
+          {
+            "id": "usda:2705958",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705958",
+            "name": "Chicken breast, baked or broiled, skin not eaten, from pre-cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 144,
+              "proteinG": 28.04,
+              "carbohydratesG": 0,
+              "fatG": 3.57
+            }
+          },
+          {
+            "id": "usda:171475",
+            "provider": "usda-fdc",
+            "providerFoodId": "171475",
+            "name": "Chicken, broilers or fryers, breast, meat and skin, cooked, fried, batter",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 260,
+              "proteinG": 24.8,
+              "carbohydratesG": 8.99,
+              "fatG": 13.2
+            }
+          },
+          {
+            "id": "usda:171476",
+            "provider": "usda-fdc",
+            "providerFoodId": "171476",
+            "name": "Chicken, broilers or fryers, breast, meat and skin, cooked, fried, flour",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 222,
+              "proteinG": 31.8,
+              "carbohydratesG": 1.64,
+              "fatG": 8.87
+            }
+          },
+          {
+            "id": "usda:2705976",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705976",
+            "name": "Chicken breast, fried, coated, skin / coating eaten, from pre-cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 250,
+              "proteinG": 20.58,
+              "carbohydratesG": 7.21,
+              "fatG": 14.79
+            }
+          },
+          {
+            "id": "usda:2705977",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705977",
+            "name": "Chicken breast, fried, coated, skin / coating not eaten, from pre-cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 176,
+              "proteinG": 29.62,
+              "carbohydratesG": 0,
+              "fatG": 5.45
+            }
+          },
+          {
+            "id": "usda:171140",
+            "provider": "usda-fdc",
+            "providerFoodId": "171140",
+            "name": "Chicken, broiler or fryers, breast, skinless, boneless, meat only, cooked, braised",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 157,
+              "proteinG": 32.1,
+              "carbohydratesG": 0,
+              "fatG": 3.24
+            }
+          },
+          {
+            "id": "usda:331960",
+            "provider": "usda-fdc",
+            "providerFoodId": "331960",
+            "name": "Chicken, broiler or fryers, breast, skinless, boneless, meat only, cooked, braised",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 166,
+              "proteinG": 32.1,
+              "carbohydratesG": 0,
+              "fatG": 3.24
+            }
+          },
+          {
+            "id": "usda:171534",
+            "provider": "usda-fdc",
+            "providerFoodId": "171534",
+            "name": "Chicken, broiler or fryers, breast, skinless, boneless, meat only, cooked, grilled",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 151,
+              "proteinG": 30.5,
+              "carbohydratesG": 0,
+              "fatG": 3.17
+            }
+          },
+          {
+            "id": "usda:171123",
+            "provider": "usda-fdc",
+            "providerFoodId": "171123",
+            "name": "Chicken, broilers or fryers, rotisserie, original seasoning, breast, meat and skin, cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 184,
+              "proteinG": 27.5,
+              "carbohydratesG": 0.02,
+              "fatG": 8.18
+            }
+          },
+          {
+            "id": "usda:171518",
+            "provider": "usda-fdc",
+            "providerFoodId": "171518",
+            "name": "Chicken, broilers or fryers, rotisserie, original seasoning, breast, meat only, cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 137,
+              "proteinG": 28,
+              "carbohydratesG": 0,
+              "fatG": 2.79
+            }
+          },
+          {
+            "id": "usda:172567",
+            "provider": "usda-fdc",
+            "providerFoodId": "172567",
+            "name": "Veal, breast, separable fat, cooked",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 521,
+              "proteinG": 9.4,
+              "carbohydratesG": 0,
+              "fatG": 53.4
+            }
+          }
+        ],
+        "page": 1,
+        "totalPages": 2140,
+        "totalHits": 42781
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/nutrition/foods/171514",
+      "status": 200,
+      "response": {
+        "id": "usda:171514",
+        "provider": "usda-fdc",
+        "providerFoodId": "171514",
+        "name": "Chicken breast tenders, breaded, cooked, microwaved",
+        "reference": {
+          "quantity": 100,
+          "unit": "g"
+        },
+        "nutrition": {
+          "caloriesKcal": 252,
+          "proteinG": 16.35,
+          "carbohydratesG": 17.56,
+          "fatG": 12.89
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/nutrition/calculate",
+      "status": 200,
+      "request": {
+        "providerFoodId": "171514",
+        "quantity": 100,
+        "unit": "g"
+      },
+      "response": {
+        "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+        "name": "Chicken breast tenders, breaded, cooked, microwaved",
+        "quantity": 100,
+        "unit": "g",
+        "caloriesKcal": 252,
+        "proteinG": 16.35,
+        "carbohydratesG": 17.56,
+        "fatG": 12.89,
+        "quantitySource": "user_entered",
+        "nutritionSource": "reference",
+        "reference": {
+          "provider": "usda-fdc",
+          "providerFoodId": "171514",
+          "amount": 100,
+          "unit": "g"
+        }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/nutrition/search?q=yogurt%20plain",
+      "status": 200,
+      "response": {
+        "foods": [
+          {
+            "id": "usda:2647437",
+            "provider": "usda-fdc",
+            "providerFoodId": "2647437",
+            "name": "Yogurt, plain, nonfat",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 50.1,
+              "proteinG": 4.23,
+              "carbohydratesG": 8.08,
+              "fatG": 0.0875
+            }
+          },
+          {
+            "id": "usda:2705464",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705464",
+            "name": "Baby Toddler yogurt, plain",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 78,
+              "proteinG": 3.82,
+              "carbohydratesG": 5.57,
+              "fatG": 4.48
+            }
+          },
+          {
+            "id": "usda:175227",
+            "provider": "usda-fdc",
+            "providerFoodId": "175227",
+            "name": "SILK Plain soy yogurt",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 66,
+              "proteinG": 2.64,
+              "carbohydratesG": 9.69,
+              "fatG": 1.76
+            }
+          },
+          {
+            "id": "usda:170903",
+            "provider": "usda-fdc",
+            "providerFoodId": "170903",
+            "name": "Yogurt, Greek, plain, lowfat",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 73,
+              "proteinG": 9.95,
+              "carbohydratesG": 3.94,
+              "fatG": 1.92
+            }
+          },
+          {
+            "id": "usda:330137",
+            "provider": "usda-fdc",
+            "providerFoodId": "330137",
+            "name": "Yogurt, Greek, plain, nonfat",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 61,
+              "proteinG": 10.3,
+              "carbohydratesG": 3.64,
+              "fatG": 0.37
+            }
+          },
+          {
+            "id": "usda:2705420",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705420",
+            "name": "Yogurt, nonfat milk, plain",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 50,
+              "proteinG": 4.23,
+              "carbohydratesG": 8.08,
+              "fatG": 0.09
+            }
+          },
+          {
+            "id": "usda:170886",
+            "provider": "usda-fdc",
+            "providerFoodId": "170886",
+            "name": "Yogurt, plain, low fat",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 63,
+              "proteinG": 5.25,
+              "carbohydratesG": 7.04,
+              "fatG": 1.55
+            }
+          },
+          {
+            "id": "usda:170887",
+            "provider": "usda-fdc",
+            "providerFoodId": "170887",
+            "name": "Yogurt, plain, skim milk",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 56,
+              "proteinG": 5.73,
+              "carbohydratesG": 7.68,
+              "fatG": 0.18
+            }
+          },
+          {
+            "id": "usda:2259793",
+            "provider": "usda-fdc",
+            "providerFoodId": "2259793",
+            "name": "Yogurt, plain, whole milk",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 77.3,
+              "proteinG": 3.82,
+              "carbohydratesG": 5.57,
+              "fatG": 4.48
+            }
+          },
+          {
+            "id": "usda:171284",
+            "provider": "usda-fdc",
+            "providerFoodId": "171284",
+            "name": "Yogurt, plain, whole milk",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 61,
+              "proteinG": 3.47,
+              "carbohydratesG": 4.66,
+              "fatG": 3.25
+            }
+          },
+          {
+            "id": "usda:2705418",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705418",
+            "name": "Yogurt, whole milk, plain",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 78,
+              "proteinG": 3.82,
+              "carbohydratesG": 5.57,
+              "fatG": 4.48
+            }
+          },
+          {
+            "id": "usda:2705424",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705424",
+            "name": "Yogurt, Greek, nonfat milk, plain",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 59,
+              "proteinG": 10.3,
+              "carbohydratesG": 3.64,
+              "fatG": 0.37
+            }
+          },
+          {
+            "id": "usda:171312",
+            "provider": "usda-fdc",
+            "providerFoodId": "171312",
+            "name": "Yogurt, Greek, nonfat, plain, CHOBANI",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 54,
+              "proteinG": 9.53,
+              "carbohydratesG": 3.43,
+              "fatG": 0.24
+            }
+          },
+          {
+            "id": "usda:2259794",
+            "provider": "usda-fdc",
+            "providerFoodId": "2259794",
+            "name": "Yogurt, Greek, plain, whole milk",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 94.5,
+              "proteinG": 8.78,
+              "carbohydratesG": 4.75,
+              "fatG": 4.39
+            }
+          },
+          {
+            "id": "usda:171304",
+            "provider": "usda-fdc",
+            "providerFoodId": "171304",
+            "name": "Yogurt, Greek, plain, whole milk",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 97,
+              "proteinG": 9,
+              "carbohydratesG": 3.98,
+              "fatG": 5
+            }
+          },
+          {
+            "id": "usda:2705422",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705422",
+            "name": "Yogurt, Greek, whole milk, plain",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 94,
+              "proteinG": 8.78,
+              "carbohydratesG": 4.75,
+              "fatG": 4.39
+            }
+          },
+          {
+            "id": "usda:171309",
+            "provider": "usda-fdc",
+            "providerFoodId": "171309",
+            "name": "Yogurt, Greek, whole, plain, CHOBANI",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 82,
+              "proteinG": 8.24,
+              "carbohydratesG": 3.24,
+              "fatG": 4.01
+            }
+          },
+          {
+            "id": "usda:2705419",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705419",
+            "name": "Yogurt, low fat milk, plain",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 63,
+              "proteinG": 5.25,
+              "carbohydratesG": 7.04,
+              "fatG": 1.55
+            }
+          },
+          {
+            "id": "usda:2705417",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705417",
+            "name": "Yogurt, NS as to type of milk, plain",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 63,
+              "proteinG": 5.25,
+              "carbohydratesG": 7.04,
+              "fatG": 1.55
+            }
+          },
+          {
+            "id": "usda:2705423",
+            "provider": "usda-fdc",
+            "providerFoodId": "2705423",
+            "name": "Yogurt, Greek, low fat milk, plain",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 67,
+              "proteinG": 10.2,
+              "carbohydratesG": 3.6,
+              "fatG": 1.36
+            }
+          }
+        ],
+        "page": 1,
+        "totalPages": 1203,
+        "totalHits": 24045
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/nutrition/foods/2647437",
+      "status": 200,
+      "response": {
+        "id": "usda:2647437",
+        "provider": "usda-fdc",
+        "providerFoodId": "2647437",
+        "name": "Yogurt, plain, nonfat",
+        "reference": {
+          "quantity": 100,
+          "unit": "g"
+        },
+        "nutrition": {
+          "caloriesKcal": 50.07437,
+          "proteinG": 4.22675,
+          "carbohydratesG": 8.07675,
+          "fatG": 0.0875
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/nutrition/calculate",
+      "status": 200,
+      "request": {
+        "providerFoodId": "2647437",
+        "quantity": 100,
+        "unit": "g"
+      },
+      "response": {
+        "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+        "name": "Yogurt, plain, nonfat",
+        "quantity": 100,
+        "unit": "g",
+        "caloriesKcal": 50.07,
+        "proteinG": 4.23,
+        "carbohydratesG": 8.08,
+        "fatG": 0.09,
+        "quantitySource": "user_entered",
+        "nutritionSource": "reference",
+        "reference": {
+          "provider": "usda-fdc",
+          "providerFoodId": "2647437",
+          "amount": 100,
+          "unit": "g"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/entries",
+      "status": 201,
+      "request": {
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T08:15:00+05:30",
+        "note": "Breakfast after a morning walk",
+        "data": {
+          "mealCategory": "breakfast",
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "name": "Rice noodles, cooked",
+              "quantity": 150,
+              "unit": "g",
+              "caloriesKcal": 160.5,
+              "proteinG": 2.67,
+              "carbohydratesG": 35.85,
+              "fatG": 0.3,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference",
+              "reference": {
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356",
+                "amount": 100,
+                "unit": "g"
+              }
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "quantity": 100,
+              "unit": "g",
+              "caloriesKcal": 252,
+              "proteinG": 16.35,
+              "carbohydratesG": 17.56,
+              "fatG": 12.89,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference",
+              "reference": {
+                "provider": "usda-fdc",
+                "providerFoodId": "171514",
+                "amount": 100,
+                "unit": "g"
+              }
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "name": "Yogurt, plain, nonfat",
+              "quantity": 100,
+              "unit": "g",
+              "caloriesKcal": 50.07,
+              "proteinG": 4.23,
+              "carbohydratesG": 8.08,
+              "fatG": 0.09,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference",
+              "reference": {
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437",
+                "amount": 100,
+                "unit": "g"
+              }
+            }
+          ]
+        }
+      },
+      "response": {
+        "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T02:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Breakfast after a morning walk",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "fatG": 0.3,
+              "name": "Rice noodles, cooked",
+              "unit": "g",
+              "proteinG": 2.67,
+              "quantity": 150,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356"
+              },
+              "caloriesKcal": 160.5,
+              "carbohydratesG": 35.85,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "fatG": 12.89,
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "unit": "g",
+              "proteinG": 16.35,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "171514"
+              },
+              "caloriesKcal": 252,
+              "carbohydratesG": 17.56,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "breakfast"
+        },
+        "summary": {
+          "caloriesKcal": 462.57
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 1,
+        "createdAt": "2026-10-05T09:41:43.195Z",
+        "updatedAt": "2026-10-05T09:41:43.195Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 200,
+      "response": {
+        "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T02:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Breakfast after a morning walk",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "fatG": 0.3,
+              "name": "Rice noodles, cooked",
+              "unit": "g",
+              "proteinG": 2.67,
+              "quantity": 150,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356"
+              },
+              "caloriesKcal": 160.5,
+              "carbohydratesG": 35.85,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "fatG": 12.89,
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "unit": "g",
+              "proteinG": 16.35,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "171514"
+              },
+              "caloriesKcal": 252,
+              "carbohydratesG": 17.56,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "breakfast"
+        },
+        "summary": {
+          "caloriesKcal": 462.57
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 1,
+        "createdAt": "2026-10-05T09:41:43.195Z",
+        "updatedAt": "2026-10-05T09:41:43.195Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries?date=2026-10-05",
+      "status": 200,
+      "response": [
+        {
+          "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+          "category": "nutrition",
+          "title": "Rice, chicken and yogurt breakfast",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T02:45:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": "Breakfast after a morning walk",
+          "attachments": [],
+          "data": {
+            "items": [
+              {
+                "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                "fatG": 0.3,
+                "name": "Rice noodles, cooked",
+                "unit": "g",
+                "proteinG": 2.67,
+                "quantity": 150,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "2708356"
+                },
+                "caloriesKcal": 160.5,
+                "carbohydratesG": 35.85,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              },
+              {
+                "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                "fatG": 12.89,
+                "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                "unit": "g",
+                "proteinG": 16.35,
+                "quantity": 100,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "171514"
+                },
+                "caloriesKcal": 252,
+                "carbohydratesG": 17.56,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              },
+              {
+                "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                "fatG": 0.09,
+                "name": "Yogurt, plain, nonfat",
+                "unit": "g",
+                "proteinG": 4.23,
+                "quantity": 100,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "2647437"
+                },
+                "caloriesKcal": 50.07,
+                "carbohydratesG": 8.08,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              }
+            ],
+            "mealCategory": "breakfast"
+          },
+          "summary": {
+            "caloriesKcal": 462.57
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T09:41:43.195Z",
+          "updatedAt": "2026-10-05T09:41:43.195Z"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/entries",
+      "status": 201,
+      "request": {
+        "category": "exercise",
+        "title": "Evening walk",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T18:00:00+05:30",
+        "data": {
+          "activityName": "Walking",
+          "durationMinutes": 30,
+          "intensity": "moderate",
+          "estimatedCaloriesBurnedKcal": 120,
+          "calorieEstimationSource": "user_entered"
+        }
+      },
+      "response": {
+        "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+        "category": "exercise",
+        "title": "Evening walk",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T12:30:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": null,
+        "attachments": [],
+        "data": {
+          "intensity": "moderate",
+          "activityName": "Walking",
+          "durationMinutes": 30,
+          "calorieEstimationSource": "user_entered",
+          "estimatedCaloriesBurnedKcal": 120
+        },
+        "summary": {
+          "caloriesKcal": null
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 1,
+        "createdAt": "2026-10-05T09:41:44.842Z",
+        "updatedAt": "2026-10-05T09:41:44.842Z"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/entries",
+      "status": 201,
+      "request": {
+        "category": "note",
+        "title": "Evening check-in",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T22:30:00+05:30",
+        "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+        "data": {}
+      },
+      "response": {
+        "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+        "category": "note",
+        "title": "Evening check-in",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T17:00:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+        "attachments": [],
+        "data": {},
+        "summary": {
+          "caloriesKcal": null
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 1,
+        "createdAt": "2026-10-05T09:41:45.773Z",
+        "updatedAt": "2026-10-05T09:41:45.773Z"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/entries",
+      "status": 201,
+      "request": {
+        "category": "nutrition",
+        "title": "Yogurt after midnight",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-06T00:15:00+05:30",
+        "note": "Late snack assigned to the prior reporting day",
+        "data": {
+          "mealCategory": "snack",
+          "items": [
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "name": "Yogurt, plain, nonfat",
+              "quantity": 100,
+              "unit": "g",
+              "caloriesKcal": 50.07,
+              "proteinG": 4.23,
+              "carbohydratesG": 8.08,
+              "fatG": 0.09,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference",
+              "reference": {
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437",
+                "amount": 100,
+                "unit": "g"
+              }
+            }
+          ]
+        }
+      },
+      "response": {
+        "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+        "category": "nutrition",
+        "title": "Yogurt after midnight",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T18:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Late snack assigned to the prior reporting day",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "snack"
+        },
+        "summary": {
+          "caloriesKcal": 50.07
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 1,
+        "createdAt": "2026-10-05T09:41:46.705Z",
+        "updatedAt": "2026-10-05T09:41:46.705Z"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/entries",
+      "status": 201,
+      "request": {
+        "category": "note",
+        "title": "Next day check-in",
+        "entryDate": "2026-10-06",
+        "occurredAt": "2026-10-06T09:00:00+05:30",
+        "note": "Feeling rested this morning.",
+        "data": {}
+      },
+      "response": {
+        "id": "9da8162c-50ea-4f05-ba3a-714dc83379c1",
+        "category": "note",
+        "title": "Next day check-in",
+        "entryDate": "2026-10-06",
+        "occurredAt": "2026-10-06T03:30:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Feeling rested this morning.",
+        "attachments": [],
+        "data": {},
+        "summary": {
+          "caloriesKcal": null
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 1,
+        "createdAt": "2026-10-05T09:41:47.646Z",
+        "updatedAt": "2026-10-05T09:41:47.646Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries?date=2026-10-05",
+      "status": 200,
+      "response": [
+        {
+          "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+          "category": "nutrition",
+          "title": "Rice, chicken and yogurt breakfast",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T02:45:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": "Breakfast after a morning walk",
+          "attachments": [],
+          "data": {
+            "items": [
+              {
+                "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                "fatG": 0.3,
+                "name": "Rice noodles, cooked",
+                "unit": "g",
+                "proteinG": 2.67,
+                "quantity": 150,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "2708356"
+                },
+                "caloriesKcal": 160.5,
+                "carbohydratesG": 35.85,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              },
+              {
+                "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                "fatG": 12.89,
+                "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                "unit": "g",
+                "proteinG": 16.35,
+                "quantity": 100,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "171514"
+                },
+                "caloriesKcal": 252,
+                "carbohydratesG": 17.56,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              },
+              {
+                "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                "fatG": 0.09,
+                "name": "Yogurt, plain, nonfat",
+                "unit": "g",
+                "proteinG": 4.23,
+                "quantity": 100,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "2647437"
+                },
+                "caloriesKcal": 50.07,
+                "carbohydratesG": 8.08,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              }
+            ],
+            "mealCategory": "breakfast"
+          },
+          "summary": {
+            "caloriesKcal": 462.57
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T09:41:43.195Z",
+          "updatedAt": "2026-10-05T09:41:43.195Z"
+        },
+        {
+          "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+          "category": "exercise",
+          "title": "Evening walk",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T12:30:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": null,
+          "attachments": [],
+          "data": {
+            "intensity": "moderate",
+            "activityName": "Walking",
+            "durationMinutes": 30,
+            "calorieEstimationSource": "user_entered",
+            "estimatedCaloriesBurnedKcal": 120
+          },
+          "summary": {
+            "caloriesKcal": null
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T09:41:44.842Z",
+          "updatedAt": "2026-10-05T09:41:44.842Z"
+        },
+        {
+          "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+          "category": "note",
+          "title": "Evening check-in",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T17:00:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+          "attachments": [],
+          "data": {},
+          "summary": {
+            "caloriesKcal": null
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T09:41:45.773Z",
+          "updatedAt": "2026-10-05T09:41:45.773Z"
+        },
+        {
+          "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+          "category": "nutrition",
+          "title": "Yogurt after midnight",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T18:45:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": "Late snack assigned to the prior reporting day",
+          "attachments": [],
+          "data": {
+            "items": [
+              {
+                "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                "fatG": 0.09,
+                "name": "Yogurt, plain, nonfat",
+                "unit": "g",
+                "proteinG": 4.23,
+                "quantity": 100,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "2647437"
+                },
+                "caloriesKcal": 50.07,
+                "carbohydratesG": 8.08,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              }
+            ],
+            "mealCategory": "snack"
+          },
+          "summary": {
+            "caloriesKcal": 50.07
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T09:41:46.705Z",
+          "updatedAt": "2026-10-05T09:41:46.705Z"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries?date=2026-10-06",
+      "status": 200,
+      "response": [
+        {
+          "id": "9da8162c-50ea-4f05-ba3a-714dc83379c1",
+          "category": "note",
+          "title": "Next day check-in",
+          "entryDate": "2026-10-06",
+          "occurredAt": "2026-10-06T03:30:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": "Feeling rested this morning.",
+          "attachments": [],
+          "data": {},
+          "summary": {
+            "caloriesKcal": null
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T09:41:47.646Z",
+          "updatedAt": "2026-10-05T09:41:47.646Z"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/v1/home?date=2026-10-05",
+      "status": 200,
+      "response": {
+        "date": "2026-10-05",
+        "timezone": "Asia/Kolkata",
+        "day": {
+          "label": "Today",
+          "weekday": "Monday",
+          "previous": "2026-10-04",
+          "next": "2026-10-06",
+          "isToday": true
+        },
+        "schedule": {
+          "wakeTime": null,
+          "sleepTime": null,
+          "crossesMidnight": false
+        },
+        "summary": {
+          "nutrition": {
+            "caloriesConsumedKcal": 512.64,
+            "entryCount": 2
+          },
+          "exercise": {
+            "durationMinutes": 30,
+            "caloriesBurnedKcal": 120
+          }
+        },
+        "timeline": [
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "08:15",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+              "category": "nutrition",
+              "title": "Rice, chicken and yogurt breakfast",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T02:45:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Breakfast after a morning walk",
+              "attachments": [],
+              "data": {
+                "items": [
+                  {
+                    "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                    "fatG": 0.3,
+                    "name": "Rice noodles, cooked",
+                    "unit": "g",
+                    "proteinG": 2.67,
+                    "quantity": 150,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2708356"
+                    },
+                    "caloriesKcal": 160.5,
+                    "carbohydratesG": 35.85,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  },
+                  {
+                    "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                    "fatG": 12.89,
+                    "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                    "unit": "g",
+                    "proteinG": 16.35,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "171514"
+                    },
+                    "caloriesKcal": 252,
+                    "carbohydratesG": 17.56,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  },
+                  {
+                    "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                    "fatG": 0.09,
+                    "name": "Yogurt, plain, nonfat",
+                    "unit": "g",
+                    "proteinG": 4.23,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2647437"
+                    },
+                    "caloriesKcal": 50.07,
+                    "carbohydratesG": 8.08,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  }
+                ],
+                "mealCategory": "breakfast"
+              },
+              "summary": {
+                "caloriesKcal": 462.57
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:43.195Z",
+              "updatedAt": "2026-10-05T09:41:43.195Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "18:00",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+              "category": "exercise",
+              "title": "Evening walk",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T12:30:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": null,
+              "attachments": [],
+              "data": {
+                "intensity": "moderate",
+                "activityName": "Walking",
+                "durationMinutes": 30,
+                "calorieEstimationSource": "user_entered",
+                "estimatedCaloriesBurnedKcal": 120
+              },
+              "summary": {
+                "caloriesKcal": null
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:44.842Z",
+              "updatedAt": "2026-10-05T09:41:44.842Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "22:30",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+              "category": "note",
+              "title": "Evening check-in",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T17:00:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+              "attachments": [],
+              "data": {},
+              "summary": {
+                "caloriesKcal": null
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:45.773Z",
+              "updatedAt": "2026-10-05T09:41:45.773Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-06",
+            "time": "00:15",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+              "category": "nutrition",
+              "title": "Yogurt after midnight",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T18:45:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Late snack assigned to the prior reporting day",
+              "attachments": [],
+              "data": {
+                "items": [
+                  {
+                    "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                    "fatG": 0.09,
+                    "name": "Yogurt, plain, nonfat",
+                    "unit": "g",
+                    "proteinG": 4.23,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2647437"
+                    },
+                    "caloriesKcal": 50.07,
+                    "carbohydratesG": 8.08,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  }
+                ],
+                "mealCategory": "snack"
+              },
+              "summary": {
+                "caloriesKcal": 50.07
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:46.705Z",
+              "updatedAt": "2026-10-05T09:41:46.705Z"
+            }
+          }
+        ],
+        "sections": [
+          {
+            "type": "nutrition_summary",
+            "data": {
+              "caloriesConsumedKcal": 512.64,
+              "entryCount": 2
+            }
+          },
+          {
+            "type": "exercise_summary",
+            "data": {
+              "durationMinutes": 30,
+              "caloriesBurnedKcal": 120
+            }
+          },
+          {
+            "type": "timeline",
+            "data": {
+              "entries": [
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "08:15",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+                    "category": "nutrition",
+                    "title": "Rice, chicken and yogurt breakfast",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T02:45:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Breakfast after a morning walk",
+                    "attachments": [],
+                    "data": {
+                      "items": [
+                        {
+                          "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                          "fatG": 0.3,
+                          "name": "Rice noodles, cooked",
+                          "unit": "g",
+                          "proteinG": 2.67,
+                          "quantity": 150,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2708356"
+                          },
+                          "caloriesKcal": 160.5,
+                          "carbohydratesG": 35.85,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        },
+                        {
+                          "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                          "fatG": 12.89,
+                          "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                          "unit": "g",
+                          "proteinG": 16.35,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "171514"
+                          },
+                          "caloriesKcal": 252,
+                          "carbohydratesG": 17.56,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        },
+                        {
+                          "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                          "fatG": 0.09,
+                          "name": "Yogurt, plain, nonfat",
+                          "unit": "g",
+                          "proteinG": 4.23,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2647437"
+                          },
+                          "caloriesKcal": 50.07,
+                          "carbohydratesG": 8.08,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        }
+                      ],
+                      "mealCategory": "breakfast"
+                    },
+                    "summary": {
+                      "caloriesKcal": 462.57
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:43.195Z",
+                    "updatedAt": "2026-10-05T09:41:43.195Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "18:00",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+                    "category": "exercise",
+                    "title": "Evening walk",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T12:30:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": null,
+                    "attachments": [],
+                    "data": {
+                      "intensity": "moderate",
+                      "activityName": "Walking",
+                      "durationMinutes": 30,
+                      "calorieEstimationSource": "user_entered",
+                      "estimatedCaloriesBurnedKcal": 120
+                    },
+                    "summary": {
+                      "caloriesKcal": null
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:44.842Z",
+                    "updatedAt": "2026-10-05T09:41:44.842Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "22:30",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+                    "category": "note",
+                    "title": "Evening check-in",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T17:00:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+                    "attachments": [],
+                    "data": {},
+                    "summary": {
+                      "caloriesKcal": null
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:45.773Z",
+                    "updatedAt": "2026-10-05T09:41:45.773Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-06",
+                  "time": "00:15",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+                    "category": "nutrition",
+                    "title": "Yogurt after midnight",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T18:45:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Late snack assigned to the prior reporting day",
+                    "attachments": [],
+                    "data": {
+                      "items": [
+                        {
+                          "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                          "fatG": 0.09,
+                          "name": "Yogurt, plain, nonfat",
+                          "unit": "g",
+                          "proteinG": 4.23,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2647437"
+                          },
+                          "caloriesKcal": 50.07,
+                          "carbohydratesG": 8.08,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        }
+                      ],
+                      "mealCategory": "snack"
+                    },
+                    "summary": {
+                      "caloriesKcal": 50.07
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:46.705Z",
+                    "updatedAt": "2026-10-05T09:41:46.705Z"
+                  }
+                }
+              ],
+              "startTime": null,
+              "endTime": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/home?date=2026-10-05",
+      "status": 200,
+      "response": {
+        "date": "2026-10-05",
+        "timezone": "Asia/Kolkata",
+        "day": {
+          "label": "Today",
+          "weekday": "Monday",
+          "previous": "2026-10-04",
+          "next": "2026-10-06",
+          "isToday": true
+        },
+        "schedule": {
+          "wakeTime": "07:00",
+          "sleepTime": "00:30",
+          "crossesMidnight": true
+        },
+        "summary": {
+          "nutrition": {
+            "caloriesConsumedKcal": 512.64,
+            "entryCount": 2
+          },
+          "exercise": {
+            "durationMinutes": 30,
+            "caloriesBurnedKcal": 120
+          }
+        },
+        "timeline": [
+          {
+            "type": "boundary",
+            "boundary": "wake",
+            "date": "2026-10-05",
+            "time": "07:00"
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "08:15",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+              "category": "nutrition",
+              "title": "Rice, chicken and yogurt breakfast",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T02:45:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Breakfast after a morning walk",
+              "attachments": [],
+              "data": {
+                "items": [
+                  {
+                    "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                    "fatG": 0.3,
+                    "name": "Rice noodles, cooked",
+                    "unit": "g",
+                    "proteinG": 2.67,
+                    "quantity": 150,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2708356"
+                    },
+                    "caloriesKcal": 160.5,
+                    "carbohydratesG": 35.85,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  },
+                  {
+                    "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                    "fatG": 12.89,
+                    "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                    "unit": "g",
+                    "proteinG": 16.35,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "171514"
+                    },
+                    "caloriesKcal": 252,
+                    "carbohydratesG": 17.56,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  },
+                  {
+                    "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                    "fatG": 0.09,
+                    "name": "Yogurt, plain, nonfat",
+                    "unit": "g",
+                    "proteinG": 4.23,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2647437"
+                    },
+                    "caloriesKcal": 50.07,
+                    "carbohydratesG": 8.08,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  }
+                ],
+                "mealCategory": "breakfast"
+              },
+              "summary": {
+                "caloriesKcal": 462.57
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:43.195Z",
+              "updatedAt": "2026-10-05T09:41:43.195Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "18:00",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+              "category": "exercise",
+              "title": "Evening walk",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T12:30:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": null,
+              "attachments": [],
+              "data": {
+                "intensity": "moderate",
+                "activityName": "Walking",
+                "durationMinutes": 30,
+                "calorieEstimationSource": "user_entered",
+                "estimatedCaloriesBurnedKcal": 120
+              },
+              "summary": {
+                "caloriesKcal": null
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:44.842Z",
+              "updatedAt": "2026-10-05T09:41:44.842Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "22:30",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+              "category": "note",
+              "title": "Evening check-in",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T17:00:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+              "attachments": [],
+              "data": {},
+              "summary": {
+                "caloriesKcal": null
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:45.773Z",
+              "updatedAt": "2026-10-05T09:41:45.773Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-06",
+            "time": "00:15",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+              "category": "nutrition",
+              "title": "Yogurt after midnight",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T18:45:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Late snack assigned to the prior reporting day",
+              "attachments": [],
+              "data": {
+                "items": [
+                  {
+                    "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                    "fatG": 0.09,
+                    "name": "Yogurt, plain, nonfat",
+                    "unit": "g",
+                    "proteinG": 4.23,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2647437"
+                    },
+                    "caloriesKcal": 50.07,
+                    "carbohydratesG": 8.08,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  }
+                ],
+                "mealCategory": "snack"
+              },
+              "summary": {
+                "caloriesKcal": 50.07
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:46.705Z",
+              "updatedAt": "2026-10-05T09:41:46.705Z"
+            }
+          },
+          {
+            "type": "boundary",
+            "boundary": "sleep",
+            "date": "2026-10-06",
+            "time": "00:30"
+          }
+        ],
+        "sections": [
+          {
+            "type": "nutrition_summary",
+            "data": {
+              "caloriesConsumedKcal": 512.64,
+              "entryCount": 2
+            }
+          },
+          {
+            "type": "exercise_summary",
+            "data": {
+              "durationMinutes": 30,
+              "caloriesBurnedKcal": 120
+            }
+          },
+          {
+            "type": "timeline",
+            "data": {
+              "entries": [
+                {
+                  "type": "boundary",
+                  "boundary": "wake",
+                  "date": "2026-10-05",
+                  "time": "07:00"
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "08:15",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+                    "category": "nutrition",
+                    "title": "Rice, chicken and yogurt breakfast",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T02:45:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Breakfast after a morning walk",
+                    "attachments": [],
+                    "data": {
+                      "items": [
+                        {
+                          "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                          "fatG": 0.3,
+                          "name": "Rice noodles, cooked",
+                          "unit": "g",
+                          "proteinG": 2.67,
+                          "quantity": 150,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2708356"
+                          },
+                          "caloriesKcal": 160.5,
+                          "carbohydratesG": 35.85,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        },
+                        {
+                          "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                          "fatG": 12.89,
+                          "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                          "unit": "g",
+                          "proteinG": 16.35,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "171514"
+                          },
+                          "caloriesKcal": 252,
+                          "carbohydratesG": 17.56,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        },
+                        {
+                          "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                          "fatG": 0.09,
+                          "name": "Yogurt, plain, nonfat",
+                          "unit": "g",
+                          "proteinG": 4.23,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2647437"
+                          },
+                          "caloriesKcal": 50.07,
+                          "carbohydratesG": 8.08,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        }
+                      ],
+                      "mealCategory": "breakfast"
+                    },
+                    "summary": {
+                      "caloriesKcal": 462.57
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:43.195Z",
+                    "updatedAt": "2026-10-05T09:41:43.195Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "18:00",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+                    "category": "exercise",
+                    "title": "Evening walk",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T12:30:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": null,
+                    "attachments": [],
+                    "data": {
+                      "intensity": "moderate",
+                      "activityName": "Walking",
+                      "durationMinutes": 30,
+                      "calorieEstimationSource": "user_entered",
+                      "estimatedCaloriesBurnedKcal": 120
+                    },
+                    "summary": {
+                      "caloriesKcal": null
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:44.842Z",
+                    "updatedAt": "2026-10-05T09:41:44.842Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "22:30",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+                    "category": "note",
+                    "title": "Evening check-in",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T17:00:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+                    "attachments": [],
+                    "data": {},
+                    "summary": {
+                      "caloriesKcal": null
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:45.773Z",
+                    "updatedAt": "2026-10-05T09:41:45.773Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-06",
+                  "time": "00:15",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+                    "category": "nutrition",
+                    "title": "Yogurt after midnight",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T18:45:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Late snack assigned to the prior reporting day",
+                    "attachments": [],
+                    "data": {
+                      "items": [
+                        {
+                          "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                          "fatG": 0.09,
+                          "name": "Yogurt, plain, nonfat",
+                          "unit": "g",
+                          "proteinG": 4.23,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2647437"
+                          },
+                          "caloriesKcal": 50.07,
+                          "carbohydratesG": 8.08,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        }
+                      ],
+                      "mealCategory": "snack"
+                    },
+                    "summary": {
+                      "caloriesKcal": 50.07
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:46.705Z",
+                    "updatedAt": "2026-10-05T09:41:46.705Z"
+                  }
+                },
+                {
+                  "type": "boundary",
+                  "boundary": "sleep",
+                  "date": "2026-10-06",
+                  "time": "00:30"
+                }
+              ],
+              "startTime": "07:00",
+              "endTime": "00:30"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/home?date=2026-10-05",
+      "status": 200,
+      "response": {
+        "date": "2026-10-05",
+        "timezone": "Asia/Kolkata",
+        "day": {
+          "label": "Today",
+          "weekday": "Monday",
+          "previous": "2026-10-04",
+          "next": "2026-10-06",
+          "isToday": true
+        },
+        "schedule": {
+          "wakeTime": "07:00",
+          "sleepTime": "23:00",
+          "crossesMidnight": false
+        },
+        "summary": {
+          "nutrition": {
+            "caloriesConsumedKcal": 512.64,
+            "entryCount": 2
+          },
+          "exercise": {
+            "durationMinutes": 30,
+            "caloriesBurnedKcal": 120
+          }
+        },
+        "timeline": [
+          {
+            "type": "boundary",
+            "boundary": "wake",
+            "date": "2026-10-05",
+            "time": "07:00"
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "08:15",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+              "category": "nutrition",
+              "title": "Rice, chicken and yogurt breakfast",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T02:45:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Breakfast after a morning walk",
+              "attachments": [],
+              "data": {
+                "items": [
+                  {
+                    "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                    "fatG": 0.3,
+                    "name": "Rice noodles, cooked",
+                    "unit": "g",
+                    "proteinG": 2.67,
+                    "quantity": 150,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2708356"
+                    },
+                    "caloriesKcal": 160.5,
+                    "carbohydratesG": 35.85,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  },
+                  {
+                    "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                    "fatG": 12.89,
+                    "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                    "unit": "g",
+                    "proteinG": 16.35,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "171514"
+                    },
+                    "caloriesKcal": 252,
+                    "carbohydratesG": 17.56,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  },
+                  {
+                    "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                    "fatG": 0.09,
+                    "name": "Yogurt, plain, nonfat",
+                    "unit": "g",
+                    "proteinG": 4.23,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2647437"
+                    },
+                    "caloriesKcal": 50.07,
+                    "carbohydratesG": 8.08,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  }
+                ],
+                "mealCategory": "breakfast"
+              },
+              "summary": {
+                "caloriesKcal": 462.57
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:43.195Z",
+              "updatedAt": "2026-10-05T09:41:43.195Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "18:00",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+              "category": "exercise",
+              "title": "Evening walk",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T12:30:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": null,
+              "attachments": [],
+              "data": {
+                "intensity": "moderate",
+                "activityName": "Walking",
+                "durationMinutes": 30,
+                "calorieEstimationSource": "user_entered",
+                "estimatedCaloriesBurnedKcal": 120
+              },
+              "summary": {
+                "caloriesKcal": null
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:44.842Z",
+              "updatedAt": "2026-10-05T09:41:44.842Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "22:30",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+              "category": "note",
+              "title": "Evening check-in",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T17:00:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+              "attachments": [],
+              "data": {},
+              "summary": {
+                "caloriesKcal": null
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:45.773Z",
+              "updatedAt": "2026-10-05T09:41:45.773Z"
+            }
+          },
+          {
+            "type": "boundary",
+            "boundary": "sleep",
+            "date": "2026-10-05",
+            "time": "23:00"
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-06",
+            "time": "00:15",
+            "outsideSchedule": true,
+            "entry": {
+              "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+              "category": "nutrition",
+              "title": "Yogurt after midnight",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T18:45:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Late snack assigned to the prior reporting day",
+              "attachments": [],
+              "data": {
+                "items": [
+                  {
+                    "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                    "fatG": 0.09,
+                    "name": "Yogurt, plain, nonfat",
+                    "unit": "g",
+                    "proteinG": 4.23,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2647437"
+                    },
+                    "caloriesKcal": 50.07,
+                    "carbohydratesG": 8.08,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  }
+                ],
+                "mealCategory": "snack"
+              },
+              "summary": {
+                "caloriesKcal": 50.07
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:46.705Z",
+              "updatedAt": "2026-10-05T09:41:46.705Z"
+            }
+          }
+        ],
+        "sections": [
+          {
+            "type": "nutrition_summary",
+            "data": {
+              "caloriesConsumedKcal": 512.64,
+              "entryCount": 2
+            }
+          },
+          {
+            "type": "exercise_summary",
+            "data": {
+              "durationMinutes": 30,
+              "caloriesBurnedKcal": 120
+            }
+          },
+          {
+            "type": "timeline",
+            "data": {
+              "entries": [
+                {
+                  "type": "boundary",
+                  "boundary": "wake",
+                  "date": "2026-10-05",
+                  "time": "07:00"
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "08:15",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+                    "category": "nutrition",
+                    "title": "Rice, chicken and yogurt breakfast",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T02:45:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Breakfast after a morning walk",
+                    "attachments": [],
+                    "data": {
+                      "items": [
+                        {
+                          "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                          "fatG": 0.3,
+                          "name": "Rice noodles, cooked",
+                          "unit": "g",
+                          "proteinG": 2.67,
+                          "quantity": 150,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2708356"
+                          },
+                          "caloriesKcal": 160.5,
+                          "carbohydratesG": 35.85,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        },
+                        {
+                          "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                          "fatG": 12.89,
+                          "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                          "unit": "g",
+                          "proteinG": 16.35,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "171514"
+                          },
+                          "caloriesKcal": 252,
+                          "carbohydratesG": 17.56,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        },
+                        {
+                          "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                          "fatG": 0.09,
+                          "name": "Yogurt, plain, nonfat",
+                          "unit": "g",
+                          "proteinG": 4.23,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2647437"
+                          },
+                          "caloriesKcal": 50.07,
+                          "carbohydratesG": 8.08,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        }
+                      ],
+                      "mealCategory": "breakfast"
+                    },
+                    "summary": {
+                      "caloriesKcal": 462.57
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:43.195Z",
+                    "updatedAt": "2026-10-05T09:41:43.195Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "18:00",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+                    "category": "exercise",
+                    "title": "Evening walk",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T12:30:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": null,
+                    "attachments": [],
+                    "data": {
+                      "intensity": "moderate",
+                      "activityName": "Walking",
+                      "durationMinutes": 30,
+                      "calorieEstimationSource": "user_entered",
+                      "estimatedCaloriesBurnedKcal": 120
+                    },
+                    "summary": {
+                      "caloriesKcal": null
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:44.842Z",
+                    "updatedAt": "2026-10-05T09:41:44.842Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "22:30",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+                    "category": "note",
+                    "title": "Evening check-in",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T17:00:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+                    "attachments": [],
+                    "data": {},
+                    "summary": {
+                      "caloriesKcal": null
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:45.773Z",
+                    "updatedAt": "2026-10-05T09:41:45.773Z"
+                  }
+                },
+                {
+                  "type": "boundary",
+                  "boundary": "sleep",
+                  "date": "2026-10-05",
+                  "time": "23:00"
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-06",
+                  "time": "00:15",
+                  "outsideSchedule": true,
+                  "entry": {
+                    "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+                    "category": "nutrition",
+                    "title": "Yogurt after midnight",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T18:45:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Late snack assigned to the prior reporting day",
+                    "attachments": [],
+                    "data": {
+                      "items": [
+                        {
+                          "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                          "fatG": 0.09,
+                          "name": "Yogurt, plain, nonfat",
+                          "unit": "g",
+                          "proteinG": 4.23,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2647437"
+                          },
+                          "caloriesKcal": 50.07,
+                          "carbohydratesG": 8.08,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        }
+                      ],
+                      "mealCategory": "snack"
+                    },
+                    "summary": {
+                      "caloriesKcal": 50.07
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:46.705Z",
+                    "updatedAt": "2026-10-05T09:41:46.705Z"
+                  }
+                }
+              ],
+              "startTime": "07:00",
+              "endTime": "23:00"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/v1/nutrition/calculate",
+      "status": 200,
+      "request": {
+        "providerFoodId": "2708356",
+        "quantity": 200,
+        "unit": "g"
+      },
+      "response": {
+        "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+        "name": "Rice noodles, cooked",
+        "quantity": 200,
+        "unit": "g",
+        "caloriesKcal": 214,
+        "proteinG": 3.56,
+        "carbohydratesG": 47.8,
+        "fatG": 0.4,
+        "quantitySource": "user_entered",
+        "nutritionSource": "reference",
+        "reference": {
+          "provider": "usda-fdc",
+          "providerFoodId": "2708356",
+          "amount": 100,
+          "unit": "g"
+        }
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 200,
+      "request": {
+        "revision": 1,
+        "note": "Changed rice from 150 g to 200 g",
+        "data": {
+          "mealCategory": "breakfast",
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "name": "Rice noodles, cooked",
+              "quantity": 200,
+              "unit": "g",
+              "caloriesKcal": 214,
+              "proteinG": 3.56,
+              "carbohydratesG": 47.8,
+              "fatG": 0.4,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference",
+              "reference": {
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356",
+                "amount": 100,
+                "unit": "g"
+              }
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "quantity": 100,
+              "unit": "g",
+              "caloriesKcal": 252,
+              "proteinG": 16.35,
+              "carbohydratesG": 17.56,
+              "fatG": 12.89,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference",
+              "reference": {
+                "provider": "usda-fdc",
+                "providerFoodId": "171514",
+                "amount": 100,
+                "unit": "g"
+              }
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "name": "Yogurt, plain, nonfat",
+              "quantity": 100,
+              "unit": "g",
+              "caloriesKcal": 50.07,
+              "proteinG": 4.23,
+              "carbohydratesG": 8.08,
+              "fatG": 0.09,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference",
+              "reference": {
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437",
+                "amount": 100,
+                "unit": "g"
+              }
+            }
+          ]
+        }
+      },
+      "response": {
+        "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T02:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Changed rice from 150 g to 200 g",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "fatG": 0.4,
+              "name": "Rice noodles, cooked",
+              "unit": "g",
+              "proteinG": 3.56,
+              "quantity": 200,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356"
+              },
+              "caloriesKcal": 214,
+              "carbohydratesG": 47.8,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "fatG": 12.89,
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "unit": "g",
+              "proteinG": 16.35,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "171514"
+              },
+              "caloriesKcal": 252,
+              "carbohydratesG": 17.56,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "breakfast"
+        },
+        "summary": {
+          "caloriesKcal": 516.07
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 2,
+        "createdAt": "2026-10-05T09:41:43.195Z",
+        "updatedAt": "2026-10-05T09:41:56.639Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/home?date=2026-10-05",
+      "status": 200,
+      "response": {
+        "date": "2026-10-05",
+        "timezone": "Asia/Kolkata",
+        "day": {
+          "label": "Today",
+          "weekday": "Monday",
+          "previous": "2026-10-04",
+          "next": "2026-10-06",
+          "isToday": true
+        },
+        "schedule": {
+          "wakeTime": null,
+          "sleepTime": null,
+          "crossesMidnight": false
+        },
+        "summary": {
+          "nutrition": {
+            "caloriesConsumedKcal": 566.14,
+            "entryCount": 2
+          },
+          "exercise": {
+            "durationMinutes": 30,
+            "caloriesBurnedKcal": 120
+          }
+        },
+        "timeline": [
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "08:15",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+              "category": "nutrition",
+              "title": "Rice, chicken and yogurt breakfast",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T02:45:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Changed rice from 150 g to 200 g",
+              "attachments": [],
+              "data": {
+                "items": [
+                  {
+                    "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                    "fatG": 0.4,
+                    "name": "Rice noodles, cooked",
+                    "unit": "g",
+                    "proteinG": 3.56,
+                    "quantity": 200,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2708356"
+                    },
+                    "caloriesKcal": 214,
+                    "carbohydratesG": 47.8,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  },
+                  {
+                    "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                    "fatG": 12.89,
+                    "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                    "unit": "g",
+                    "proteinG": 16.35,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "171514"
+                    },
+                    "caloriesKcal": 252,
+                    "carbohydratesG": 17.56,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  },
+                  {
+                    "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                    "fatG": 0.09,
+                    "name": "Yogurt, plain, nonfat",
+                    "unit": "g",
+                    "proteinG": 4.23,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2647437"
+                    },
+                    "caloriesKcal": 50.07,
+                    "carbohydratesG": 8.08,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  }
+                ],
+                "mealCategory": "breakfast"
+              },
+              "summary": {
+                "caloriesKcal": 516.07
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 2,
+              "createdAt": "2026-10-05T09:41:43.195Z",
+              "updatedAt": "2026-10-05T09:41:56.639Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "18:00",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+              "category": "exercise",
+              "title": "Evening walk",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T12:30:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": null,
+              "attachments": [],
+              "data": {
+                "intensity": "moderate",
+                "activityName": "Walking",
+                "durationMinutes": 30,
+                "calorieEstimationSource": "user_entered",
+                "estimatedCaloriesBurnedKcal": 120
+              },
+              "summary": {
+                "caloriesKcal": null
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:44.842Z",
+              "updatedAt": "2026-10-05T09:41:44.842Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "22:30",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+              "category": "note",
+              "title": "Evening check-in",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T17:00:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+              "attachments": [],
+              "data": {},
+              "summary": {
+                "caloriesKcal": null
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:45.773Z",
+              "updatedAt": "2026-10-05T09:41:45.773Z"
+            }
+          },
+          {
+            "type": "entry",
+            "date": "2026-10-06",
+            "time": "00:15",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+              "category": "nutrition",
+              "title": "Yogurt after midnight",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T18:45:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "Late snack assigned to the prior reporting day",
+              "attachments": [],
+              "data": {
+                "items": [
+                  {
+                    "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                    "fatG": 0.09,
+                    "name": "Yogurt, plain, nonfat",
+                    "unit": "g",
+                    "proteinG": 4.23,
+                    "quantity": 100,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "usda-fdc",
+                      "providerFoodId": "2647437"
+                    },
+                    "caloriesKcal": 50.07,
+                    "carbohydratesG": 8.08,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  }
+                ],
+                "mealCategory": "snack"
+              },
+              "summary": {
+                "caloriesKcal": 50.07
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T09:41:46.705Z",
+              "updatedAt": "2026-10-05T09:41:46.705Z"
+            }
+          }
+        ],
+        "sections": [
+          {
+            "type": "nutrition_summary",
+            "data": {
+              "caloriesConsumedKcal": 566.14,
+              "entryCount": 2
+            }
+          },
+          {
+            "type": "exercise_summary",
+            "data": {
+              "durationMinutes": 30,
+              "caloriesBurnedKcal": 120
+            }
+          },
+          {
+            "type": "timeline",
+            "data": {
+              "entries": [
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "08:15",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+                    "category": "nutrition",
+                    "title": "Rice, chicken and yogurt breakfast",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T02:45:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Changed rice from 150 g to 200 g",
+                    "attachments": [],
+                    "data": {
+                      "items": [
+                        {
+                          "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                          "fatG": 0.4,
+                          "name": "Rice noodles, cooked",
+                          "unit": "g",
+                          "proteinG": 3.56,
+                          "quantity": 200,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2708356"
+                          },
+                          "caloriesKcal": 214,
+                          "carbohydratesG": 47.8,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        },
+                        {
+                          "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                          "fatG": 12.89,
+                          "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                          "unit": "g",
+                          "proteinG": 16.35,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "171514"
+                          },
+                          "caloriesKcal": 252,
+                          "carbohydratesG": 17.56,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        },
+                        {
+                          "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                          "fatG": 0.09,
+                          "name": "Yogurt, plain, nonfat",
+                          "unit": "g",
+                          "proteinG": 4.23,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2647437"
+                          },
+                          "caloriesKcal": 50.07,
+                          "carbohydratesG": 8.08,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        }
+                      ],
+                      "mealCategory": "breakfast"
+                    },
+                    "summary": {
+                      "caloriesKcal": 516.07
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 2,
+                    "createdAt": "2026-10-05T09:41:43.195Z",
+                    "updatedAt": "2026-10-05T09:41:56.639Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "18:00",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+                    "category": "exercise",
+                    "title": "Evening walk",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T12:30:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": null,
+                    "attachments": [],
+                    "data": {
+                      "intensity": "moderate",
+                      "activityName": "Walking",
+                      "durationMinutes": 30,
+                      "calorieEstimationSource": "user_entered",
+                      "estimatedCaloriesBurnedKcal": 120
+                    },
+                    "summary": {
+                      "caloriesKcal": null
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:44.842Z",
+                    "updatedAt": "2026-10-05T09:41:44.842Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "22:30",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+                    "category": "note",
+                    "title": "Evening check-in",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T17:00:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+                    "attachments": [],
+                    "data": {},
+                    "summary": {
+                      "caloriesKcal": null
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:45.773Z",
+                    "updatedAt": "2026-10-05T09:41:45.773Z"
+                  }
+                },
+                {
+                  "type": "entry",
+                  "date": "2026-10-06",
+                  "time": "00:15",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+                    "category": "nutrition",
+                    "title": "Yogurt after midnight",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T18:45:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "Late snack assigned to the prior reporting day",
+                    "attachments": [],
+                    "data": {
+                      "items": [
+                        {
+                          "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                          "fatG": 0.09,
+                          "name": "Yogurt, plain, nonfat",
+                          "unit": "g",
+                          "proteinG": 4.23,
+                          "quantity": 100,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "usda-fdc",
+                            "providerFoodId": "2647437"
+                          },
+                          "caloriesKcal": 50.07,
+                          "carbohydratesG": 8.08,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        }
+                      ],
+                      "mealCategory": "snack"
+                    },
+                    "summary": {
+                      "caloriesKcal": 50.07
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T09:41:46.705Z",
+                    "updatedAt": "2026-10-05T09:41:46.705Z"
+                  }
+                }
+              ],
+              "startTime": null,
+              "endTime": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries?date=2026-10-05",
+      "status": 200,
+      "response": [
+        {
+          "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+          "category": "nutrition",
+          "title": "Rice, chicken and yogurt breakfast",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T02:45:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": "Changed rice from 150 g to 200 g",
+          "attachments": [],
+          "data": {
+            "items": [
+              {
+                "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+                "fatG": 0.4,
+                "name": "Rice noodles, cooked",
+                "unit": "g",
+                "proteinG": 3.56,
+                "quantity": 200,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "2708356"
+                },
+                "caloriesKcal": 214,
+                "carbohydratesG": 47.8,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              },
+              {
+                "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+                "fatG": 12.89,
+                "name": "Chicken breast tenders, breaded, cooked, microwaved",
+                "unit": "g",
+                "proteinG": 16.35,
+                "quantity": 100,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "171514"
+                },
+                "caloriesKcal": 252,
+                "carbohydratesG": 17.56,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              },
+              {
+                "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                "fatG": 0.09,
+                "name": "Yogurt, plain, nonfat",
+                "unit": "g",
+                "proteinG": 4.23,
+                "quantity": 100,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "2647437"
+                },
+                "caloriesKcal": 50.07,
+                "carbohydratesG": 8.08,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              }
+            ],
+            "mealCategory": "breakfast"
+          },
+          "summary": {
+            "caloriesKcal": 516.07
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 2,
+          "createdAt": "2026-10-05T09:41:43.195Z",
+          "updatedAt": "2026-10-05T09:41:56.639Z"
+        },
+        {
+          "id": "4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+          "category": "exercise",
+          "title": "Evening walk",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T12:30:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": null,
+          "attachments": [],
+          "data": {
+            "intensity": "moderate",
+            "activityName": "Walking",
+            "durationMinutes": 30,
+            "calorieEstimationSource": "user_entered",
+            "estimatedCaloriesBurnedKcal": 120
+          },
+          "summary": {
+            "caloriesKcal": null
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T09:41:44.842Z",
+          "updatedAt": "2026-10-05T09:41:44.842Z"
+        },
+        {
+          "id": "60de978c-f71d-4fa8-bcdf-ab638985ba71",
+          "category": "note",
+          "title": "Evening check-in",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T17:00:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": "Feeling tired after a busy day. Drank water and plan to sleep early.",
+          "attachments": [],
+          "data": {},
+          "summary": {
+            "caloriesKcal": null
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T09:41:45.773Z",
+          "updatedAt": "2026-10-05T09:41:45.773Z"
+        },
+        {
+          "id": "ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+          "category": "nutrition",
+          "title": "Yogurt after midnight",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T18:45:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": "Late snack assigned to the prior reporting day",
+          "attachments": [],
+          "data": {
+            "items": [
+              {
+                "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+                "fatG": 0.09,
+                "name": "Yogurt, plain, nonfat",
+                "unit": "g",
+                "proteinG": 4.23,
+                "quantity": 100,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "usda-fdc",
+                  "providerFoodId": "2647437"
+                },
+                "caloriesKcal": 50.07,
+                "carbohydratesG": 8.08,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              }
+            ],
+            "mealCategory": "snack"
+          },
+          "summary": {
+            "caloriesKcal": 50.07
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T09:41:46.705Z",
+          "updatedAt": "2026-10-05T09:41:46.705Z"
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/v1/entries",
+      "status": 400,
+      "request": {
+        "category": "nutrition",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T08:00:00Z",
+        "data": {
+          "mealCategory": "lunch",
+          "items": []
+        }
+      },
+      "response": {
+        "message": "Nutrition requires 1–100 items",
+        "error": "Bad Request",
+        "statusCode": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries?date=2026-02-30",
+      "status": 400,
+      "response": {
+        "message": "date must be a valid YYYY-MM-DD",
+        "error": "Bad Request",
+        "statusCode": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 401,
+      "response": {
+        "message": "User identity not found",
+        "error": "Unauthorized",
+        "statusCode": 401
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/home?date=2026-10-05",
+      "status": 403,
+      "response": {
+        "message": "Complete onboarding first",
+        "error": "Forbidden",
+        "statusCode": 403
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/home?date=2026-10-05",
+      "status": 401,
+      "response": {
+        "message": "Bearer token required",
+        "error": "Unauthorized",
+        "statusCode": 401
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 200,
+      "request": {
+        "revision": 2,
+        "note": "Smoke test edited meal"
+      },
+      "response": {
+        "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T02:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Smoke test edited meal",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "fatG": 0.4,
+              "name": "Rice noodles, cooked",
+              "unit": "g",
+              "proteinG": 3.56,
+              "quantity": 200,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356"
+              },
+              "caloriesKcal": 214,
+              "carbohydratesG": 47.8,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "fatG": 12.89,
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "unit": "g",
+              "proteinG": 16.35,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "171514"
+              },
+              "caloriesKcal": 252,
+              "carbohydratesG": 17.56,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "breakfast"
+        },
+        "summary": {
+          "caloriesKcal": 516.07
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 3,
+        "createdAt": "2026-10-05T09:41:43.195Z",
+        "updatedAt": "2026-10-05T09:42:01.434Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 200,
+      "response": {
+        "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T02:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Smoke test edited meal",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "fatG": 0.4,
+              "name": "Rice noodles, cooked",
+              "unit": "g",
+              "proteinG": 3.56,
+              "quantity": 200,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356"
+              },
+              "caloriesKcal": 214,
+              "carbohydratesG": 47.8,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "fatG": 12.89,
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "unit": "g",
+              "proteinG": 16.35,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "171514"
+              },
+              "caloriesKcal": 252,
+              "carbohydratesG": 17.56,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "breakfast"
+        },
+        "summary": {
+          "caloriesKcal": 516.07
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 3,
+        "createdAt": "2026-10-05T09:41:43.195Z",
+        "updatedAt": "2026-10-05T09:42:01.434Z"
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 409,
+      "request": {
+        "revision": 1,
+        "note": "Conflicting edit"
+      },
+      "response": {
+        "message": "Entry changed; reload before editing",
+        "error": "Conflict",
+        "statusCode": 409
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 200,
+      "response": {
+        "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T02:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Smoke test edited meal",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "fatG": 0.4,
+              "name": "Rice noodles, cooked",
+              "unit": "g",
+              "proteinG": 3.56,
+              "quantity": 200,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356"
+              },
+              "caloriesKcal": 214,
+              "carbohydratesG": 47.8,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "fatG": 12.89,
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "unit": "g",
+              "proteinG": 16.35,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "171514"
+              },
+              "caloriesKcal": 252,
+              "carbohydratesG": 17.56,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "breakfast"
+        },
+        "summary": {
+          "caloriesKcal": 516.07
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": "AI_NETWORK_ERROR",
+          "synopsis": null
+        },
+        "revision": 3,
+        "createdAt": "2026-10-05T09:41:43.195Z",
+        "updatedAt": "2026-10-05T09:42:01.434Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 200,
+      "response": {
+        "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T02:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Smoke test edited meal",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "fatG": 0.4,
+              "name": "Rice noodles, cooked",
+              "unit": "g",
+              "proteinG": 3.56,
+              "quantity": 200,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356"
+              },
+              "caloriesKcal": 214,
+              "carbohydratesG": 47.8,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "fatG": 12.89,
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "unit": "g",
+              "proteinG": 16.35,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "171514"
+              },
+              "caloriesKcal": 252,
+              "carbohydratesG": 17.56,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "breakfast"
+        },
+        "summary": {
+          "caloriesKcal": 516.07
+        },
+        "ai": {
+          "status": "failed",
+          "errorCode": "AI_NETWORK_ERROR",
+          "synopsis": null
+        },
+        "revision": 3,
+        "createdAt": "2026-10-05T09:41:43.195Z",
+        "updatedAt": "2026-10-05T09:42:01.434Z"
+      }
+    },
+    {
+      "method": "PATCH",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 200,
+      "request": {
+        "note": "Completed fixture verification"
+      },
+      "response": {
+        "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T02:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Completed fixture verification",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "fatG": 0.4,
+              "name": "Rice noodles, cooked",
+              "unit": "g",
+              "proteinG": 3.56,
+              "quantity": 200,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356"
+              },
+              "caloriesKcal": 214,
+              "carbohydratesG": 47.8,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "fatG": 12.89,
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "unit": "g",
+              "proteinG": 16.35,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "171514"
+              },
+              "caloriesKcal": 252,
+              "carbohydratesG": 17.56,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "breakfast"
+        },
+        "summary": {
+          "caloriesKcal": 516.07
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 4,
+        "createdAt": "2026-10-05T09:41:43.195Z",
+        "updatedAt": "2026-10-05T09:42:11.618Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 200,
+      "response": {
+        "id": "6aada209-17ed-4038-999e-f4ca9996d361",
+        "category": "nutrition",
+        "title": "Rice, chicken and yogurt breakfast",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T02:45:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "Completed fixture verification",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "79a82bfd-bc91-4461-b591-6372ec72c16b",
+              "fatG": 0.4,
+              "name": "Rice noodles, cooked",
+              "unit": "g",
+              "proteinG": 3.56,
+              "quantity": 200,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2708356"
+              },
+              "caloriesKcal": 214,
+              "carbohydratesG": 47.8,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "64a9bf66-e6c1-471f-8038-c0e143bd6636",
+              "fatG": 12.89,
+              "name": "Chicken breast tenders, breaded, cooked, microwaved",
+              "unit": "g",
+              "proteinG": 16.35,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "171514"
+              },
+              "caloriesKcal": 252,
+              "carbohydratesG": 17.56,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            },
+            {
+              "id": "1935f138-736d-42af-9f32-7c05e6ceda10",
+              "fatG": 0.09,
+              "name": "Yogurt, plain, nonfat",
+              "unit": "g",
+              "proteinG": 4.23,
+              "quantity": 100,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "usda-fdc",
+                "providerFoodId": "2647437"
+              },
+              "caloriesKcal": 50.07,
+              "carbohydratesG": 8.08,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "breakfast"
+        },
+        "summary": {
+          "caloriesKcal": 516.07
+        },
+        "ai": {
+          "status": "processing",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 4,
+        "createdAt": "2026-10-05T09:41:43.195Z",
+        "updatedAt": "2026-10-05T09:42:11.618Z"
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 204,
+      "response": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/entries/4f281b0d-7dd3-4929-bcfd-007a5f5190d3",
+      "status": 204,
+      "response": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/entries/60de978c-f71d-4fa8-bcdf-ab638985ba71",
+      "status": 204,
+      "response": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/entries/ac2b4ed1-78ad-4a9e-ad76-d77ae05aa8b7",
+      "status": 204,
+      "response": null
+    },
+    {
+      "method": "DELETE",
+      "path": "/v1/entries/9da8162c-50ea-4f05-ba3a-714dc83379c1",
+      "status": 204,
+      "response": null
+    },
+    {
+      "method": "GET",
+      "path": "/v1/entries/6aada209-17ed-4038-999e-f4ca9996d361",
+      "status": 404,
+      "response": {
+        "message": "Entry not found",
+        "error": "Not Found",
+        "statusCode": 404
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/home?date=2026-10-05",
+      "status": 200,
+      "response": {
+        "date": "2026-10-05",
+        "timezone": "Asia/Kolkata",
+        "day": {
+          "label": "Today",
+          "weekday": "Monday",
+          "previous": "2026-10-04",
+          "next": "2026-10-06",
+          "isToday": true
+        },
+        "schedule": {
+          "wakeTime": null,
+          "sleepTime": null,
+          "crossesMidnight": false
+        },
+        "summary": {
+          "nutrition": {
+            "caloriesConsumedKcal": 0,
+            "entryCount": 0
+          },
+          "exercise": {
+            "durationMinutes": 0,
+            "caloriesBurnedKcal": null
+          }
+        },
+        "timeline": [],
+        "sections": [
+          {
+            "type": "nutrition_summary",
+            "data": {
+              "caloriesConsumedKcal": 0,
+              "entryCount": 0
+            }
+          },
+          {
+            "type": "exercise_summary",
+            "data": {
+              "durationMinutes": 0,
+              "caloriesBurnedKcal": null
+            }
+          },
+          {
+            "type": "timeline",
+            "data": {
+              "entries": [],
+              "startTime": null,
+              "endTime": null
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "checks": [
+    "Every new HTTP endpoint exercised with realistic meals, exercise and notes",
+    "Day navigation and semantic sections match Home data",
+    "Sleep profiles: overnight 00:30 and same-day 23:00 (real database fixtures rolled back)",
+    "Reporting date keeps after-midnight snack on assigned day",
+    "USDA fetched portions survive create/read/list and larger-portion edit",
+    "Ownership and production authentication",
+    "AI stale revision, lease recovery, backoff, retry limit and rollback-only success",
+    "Soft-deletion restores original totals"
+  ]
+}

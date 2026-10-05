@@ -41,7 +41,7 @@ Do not create additional Prisma clients per request. Use tagged raw queries for 
 
 ## Schema and migrations
 
-The connected database currently has no application tables in `public`, so the schema intentionally has no domain models and no migration has been applied. Prisma Client still generates and supports raw queries. Add models when the application's domain is defined.
+The schema defines the nine-table health model described in [the database contract](docs/database-schema.md). Checked-in migrations include SQL constraints and triggers for ownership, revisions and append-only observations. Use `pnpm run prisma:deploy` to install these migrations; client generation alone does not apply them.
 
 ```bash
 # Validate the schema
@@ -135,3 +135,14 @@ adapter. Use cases have no Prisma dependency. Credential hashing has its own
 small port and scrypt adapter. Shared database lifecycle code lives in
 `src/common/database`. Unit and HTTP tests cover validation, hashing, guest
 conversion, sign-in and error mapping; live checks use the configured `.env` DB.
+
+## Product APIs
+
+Entries CRUD, USDA and Open Food Facts search/portion calculation, Home aggregation and the revision-safe
+AI worker are implemented. See [the product API contract](docs/product-api.md) for
+request examples, local test identity, Home semantics and provider configuration.
+Run `pnpm run product:check` for the opt-in live flow check against `test@email.com`;
+it creates and soft-deletes its own test entries.
+
+Open Food Facts uses the same Nutrition APIs with `provider=open-food-facts`.
+Run `pnpm run nutrition:check-off` for the live barcode/search/entry/Home check.

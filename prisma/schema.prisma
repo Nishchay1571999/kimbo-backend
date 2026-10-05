@@ -150,7 +150,7 @@ model Entity {
   occurredAt         DateTime         @map("occurred_at") @db.Timestamptz(3)
   recordedTimezone   String           @map("recorded_timezone") @db.VarChar(100)
   inputSource        InputSource      @map("input_source")
-  /// Array of attachment IDs, types, storage keys, MIME types and media metadata.
+  /// Array of attachment IDs, types, Base64 file bytes, MIME types and media metadata.
   entityAttachments  Json             @default("[]") @map("entity_attachments") @db.JsonB
   entityTagDetailsId String           @unique @map("entity_tag_details_id") @db.Uuid
   revision           Int              @default(1)

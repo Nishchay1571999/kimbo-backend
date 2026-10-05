@@ -27,7 +27,12 @@
     "prisma:status": "prisma migrate status",
     "prisma:studio": "prisma studio",
     "db:check": "pnpm run build && node scripts/check-database.mjs",
-    "health:check": "pnpm run build && node scripts/check-health.mjs"
+    "health:check": "pnpm run build && node scripts/check-health.mjs",
+    "product:check": "pnpm run build && node scripts/check-product-flows.mjs",
+    "ai:configure": "pnpm run build && node scripts/configure-ai-models.mjs",
+    "ai:check-models": "pnpm run build && node scripts/check-ai-models.mjs",
+    "ai:check": "pnpm run build && node scripts/check-ai-flows.mjs",
+    "nutrition:check-off": "pnpm run build && node scripts/check-open-food-facts.mjs"
   },
   "dependencies": {
     "@nestjs/common": "^12.0.1",

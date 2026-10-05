@@ -1,0 +1,44 @@
+{
+  "account": "test@email.com",
+  "checkedAt": "2026-10-05T09:34:19.280Z",
+  "results": [
+    {
+      "kind": "image",
+      "entryId": "a50c4a90-1719-4f0f-819f-40a827bbf893",
+      "decodedBytes": 1320,
+      "base64RoundTrip": true,
+      "status": "completed",
+      "modelId": "5771ebc7-5049-4987-90dd-01c547a8375d",
+      "providerModelId": "openai/gpt-4o-mini",
+      "synopsis": "The image is a simple red square on a white background.",
+      "structured": {
+        "observations": [
+          "The image features a solid red square.",
+          "The background is white.",
+          "The square is centered in the image.",
+          "The dimensions of the square are equal in height and width.",
+          "There are no other shapes or colors present."
+        ]
+      },
+      "revision": 1
+    },
+    {
+      "kind": "image",
+      "entryId": "a9ee8e4e-438c-43be-b995-b20efd17f35d",
+      "decodedBytes": 1320,
+      "base64RoundTrip": true,
+      "status": "completed",
+      "modelId": "3b6f723f-9f92-429e-96af-c49b8f38a58d",
+      "providerModelId": "google/gemini-2.5-flash-lite",
+      "synopsis": "A red square is centered on a white background.",
+      "structured": {
+        "observations": [
+          "The image contains a solid red square.",
+          "The square is centered on the image.",
+          "The background of the image is white."
+        ]
+      },
+      "revision": 1
+    }
+  ]
+}

@@ -1,0 +1,862 @@
+{
+  "account": "test@email.com",
+  "checkedAt": "2026-10-05T10:06:12.906Z",
+  "provider": "open-food-facts",
+  "environment": "production",
+  "requests": [
+    {
+      "method": "GET",
+      "path": "home?date=2026-10-05",
+      "status": 200,
+      "response": {
+        "date": "2026-10-05",
+        "timezone": "Asia/Kolkata",
+        "day": {
+          "label": "Today",
+          "weekday": "Monday",
+          "previous": "2026-10-04",
+          "next": "2026-10-06",
+          "isToday": true
+        },
+        "schedule": {
+          "wakeTime": null,
+          "sleepTime": null,
+          "crossesMidnight": false
+        },
+        "summary": {
+          "nutrition": {
+            "caloriesConsumedKcal": 0,
+            "entryCount": 0
+          },
+          "exercise": {
+            "durationMinutes": 0,
+            "caloriesBurnedKcal": null
+          }
+        },
+        "timeline": [],
+        "sections": [
+          {
+            "type": "nutrition_summary",
+            "data": {
+              "caloriesConsumedKcal": 0,
+              "entryCount": 0
+            }
+          },
+          {
+            "type": "exercise_summary",
+            "data": {
+              "durationMinutes": 0,
+              "caloriesBurnedKcal": null
+            }
+          },
+          {
+            "type": "timeline",
+            "data": {
+              "entries": [],
+              "startTime": null,
+              "endTime": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "nutrition/search?provider=open-food-facts&q=Nutella",
+      "status": 200,
+      "response": {
+        "foods": [
+          {
+            "id": "open-food-facts:3017620422003",
+            "provider": "open-food-facts",
+            "providerFoodId": "3017620422003",
+            "name": "Nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:3017620425035",
+            "provider": "open-food-facts",
+            "providerFoodId": "3017620425035",
+            "name": "Nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:3017620429484",
+            "provider": "open-food-facts",
+            "providerFoodId": "3017620429484",
+            "name": "Nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:8000500426494",
+            "provider": "open-food-facts",
+            "providerFoodId": "8000500426494",
+            "name": "Nutella Plant-Based",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 534,
+              "proteinG": 6.8,
+              "carbohydratesG": 53.4,
+              "fatG": 31.8
+            }
+          },
+          {
+            "id": "open-food-facts:80176800",
+            "provider": "open-food-facts",
+            "providerFoodId": "80176800",
+            "name": "Nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 533.33,
+              "proteinG": 6,
+              "carbohydratesG": 57.33,
+              "fatG": 30.67
+            }
+          },
+          {
+            "id": "open-food-facts:8000500310427",
+            "provider": "open-food-facts",
+            "providerFoodId": "8000500310427",
+            "name": "Biscuits NUTELLA Biscuits Noisettes et Cacao x22 - 304g",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 515,
+              "proteinG": 7.9,
+              "carbohydratesG": 64,
+              "fatG": 24.8
+            }
+          },
+          {
+            "id": "open-food-facts:59032823",
+            "provider": "open-food-facts",
+            "providerFoodId": "59032823",
+            "name": "nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:8000500179864",
+            "provider": "open-food-facts",
+            "providerFoodId": "8000500179864",
+            "name": "Nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.2,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:3017620421006",
+            "provider": "open-food-facts",
+            "providerFoodId": "3017620421006",
+            "name": "Pâte à tartiner Nutella noisettes et cacao - 750g",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:8000500082379",
+            "provider": "open-food-facts",
+            "providerFoodId": "8000500082379",
+            "name": "Nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:3017620420702",
+            "provider": "open-food-facts",
+            "providerFoodId": "3017620420702",
+            "name": "Nutella pâte à tartiner aux noisettes et au cacao",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:4008400401621",
+            "provider": "open-food-facts",
+            "providerFoodId": "4008400401621",
+            "name": "Nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:4008400404127",
+            "provider": "open-food-facts",
+            "providerFoodId": "4008400404127",
+            "name": "Nutella Nuss-Nugat-Creme",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 538,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:80135876",
+            "provider": "open-food-facts",
+            "providerFoodId": "80135876",
+            "name": "Nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:8000500310397",
+            "provider": "open-food-facts",
+            "providerFoodId": "8000500310397",
+            "name": "nutella biscuits",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 515,
+              "proteinG": 7.9,
+              "carbohydratesG": 64,
+              "fatG": 24.8
+            }
+          },
+          {
+            "id": "open-food-facts:8000500227848",
+            "provider": "open-food-facts",
+            "providerFoodId": "8000500227848",
+            "name": "Biscuits NUTELLA B-ready Noisettes et Cacao x6 - 132g",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 521,
+              "proteinG": 7.2,
+              "carbohydratesG": 60.7,
+              "fatG": 27
+            }
+          },
+          {
+            "id": "open-food-facts:4008400402222",
+            "provider": "open-food-facts",
+            "providerFoodId": "4008400402222",
+            "name": "Nutella",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 539,
+              "proteinG": 6.3,
+              "carbohydratesG": 57.5,
+              "fatG": 30.9
+            }
+          },
+          {
+            "id": "open-food-facts:8000500217078",
+            "provider": "open-food-facts",
+            "providerFoodId": "8000500217078",
+            "name": "Nutella B-ready",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 521,
+              "proteinG": 7.2,
+              "carbohydratesG": 60.7,
+              "fatG": 27
+            }
+          },
+          {
+            "id": "open-food-facts:8000500223369",
+            "provider": "open-food-facts",
+            "providerFoodId": "8000500223369",
+            "name": "Biscuits NUTELLA B-ready Noisettes et Cacao x15 - 330g",
+            "reference": {
+              "quantity": 100,
+              "unit": "g"
+            },
+            "nutrition": {
+              "caloriesKcal": 521,
+              "proteinG": 7.2,
+              "carbohydratesG": 60.7,
+              "fatG": 27
+            }
+          }
+        ],
+        "page": 1,
+        "totalHits": 1079,
+        "totalPages": 54
+      }
+    },
+    {
+      "method": "GET",
+      "path": "nutrition/foods/3017624010701?provider=open-food-facts",
+      "status": 200,
+      "response": {
+        "id": "open-food-facts:3017624010701",
+        "provider": "open-food-facts",
+        "providerFoodId": "3017624010701",
+        "name": "Nutella",
+        "reference": {
+          "quantity": 100,
+          "unit": "g"
+        },
+        "nutrition": {
+          "caloriesKcal": 539,
+          "proteinG": 6.3,
+          "carbohydratesG": 57.5,
+          "fatG": 30.9
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "nutrition/calculate",
+      "status": 200,
+      "body": {
+        "provider": "open-food-facts",
+        "providerFoodId": "3017624010701",
+        "quantity": 15,
+        "unit": "g"
+      },
+      "response": {
+        "id": "4dbe56bc-f1ec-4523-b634-ef7ae3091caf",
+        "name": "Nutella",
+        "quantity": 15,
+        "unit": "g",
+        "caloriesKcal": 80.85,
+        "proteinG": 0.95,
+        "carbohydratesG": 8.63,
+        "fatG": 4.64,
+        "quantitySource": "user_entered",
+        "nutritionSource": "reference",
+        "reference": {
+          "provider": "open-food-facts",
+          "providerFoodId": "3017624010701",
+          "amount": 100,
+          "unit": "g"
+        }
+      }
+    },
+    {
+      "method": "POST",
+      "path": "entries",
+      "status": 201,
+      "body": {
+        "category": "nutrition",
+        "title": "Nutella snack",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T16:00:00+05:30",
+        "note": "15 g of Nutella, nutrition confirmed from Open Food Facts",
+        "data": {
+          "mealCategory": "snack",
+          "items": [
+            {
+              "id": "4dbe56bc-f1ec-4523-b634-ef7ae3091caf",
+              "name": "Nutella",
+              "quantity": 15,
+              "unit": "g",
+              "caloriesKcal": 80.85,
+              "proteinG": 0.95,
+              "carbohydratesG": 8.63,
+              "fatG": 4.64,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference",
+              "reference": {
+                "provider": "open-food-facts",
+                "providerFoodId": "3017624010701",
+                "amount": 100,
+                "unit": "g"
+              }
+            }
+          ]
+        }
+      },
+      "response": {
+        "id": "ed580d1f-7149-4917-be7c-053056ce9f85",
+        "category": "nutrition",
+        "title": "Nutella snack",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T10:30:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "15 g of Nutella, nutrition confirmed from Open Food Facts",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "4dbe56bc-f1ec-4523-b634-ef7ae3091caf",
+              "fatG": 4.64,
+              "name": "Nutella",
+              "unit": "g",
+              "proteinG": 0.95,
+              "quantity": 15,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "open-food-facts",
+                "providerFoodId": "3017624010701"
+              },
+              "caloriesKcal": 80.85,
+              "carbohydratesG": 8.63,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "snack"
+        },
+        "summary": {
+          "caloriesKcal": 80.85
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 1,
+        "createdAt": "2026-10-05T10:06:16.570Z",
+        "updatedAt": "2026-10-05T10:06:16.570Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "entries/ed580d1f-7149-4917-be7c-053056ce9f85",
+      "status": 200,
+      "response": {
+        "id": "ed580d1f-7149-4917-be7c-053056ce9f85",
+        "category": "nutrition",
+        "title": "Nutella snack",
+        "entryDate": "2026-10-05",
+        "occurredAt": "2026-10-05T10:30:00.000Z",
+        "recordedTimezone": "Asia/Kolkata",
+        "inputSource": "text",
+        "note": "15 g of Nutella, nutrition confirmed from Open Food Facts",
+        "attachments": [],
+        "data": {
+          "items": [
+            {
+              "id": "4dbe56bc-f1ec-4523-b634-ef7ae3091caf",
+              "fatG": 4.64,
+              "name": "Nutella",
+              "unit": "g",
+              "proteinG": 0.95,
+              "quantity": 15,
+              "reference": {
+                "unit": "g",
+                "amount": 100,
+                "provider": "open-food-facts",
+                "providerFoodId": "3017624010701"
+              },
+              "caloriesKcal": 80.85,
+              "carbohydratesG": 8.63,
+              "quantitySource": "user_entered",
+              "nutritionSource": "reference"
+            }
+          ],
+          "mealCategory": "snack"
+        },
+        "summary": {
+          "caloriesKcal": 80.85
+        },
+        "ai": {
+          "status": "pending",
+          "errorCode": null,
+          "synopsis": null
+        },
+        "revision": 1,
+        "createdAt": "2026-10-05T10:06:16.570Z",
+        "updatedAt": "2026-10-05T10:06:16.570Z"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "entries?date=2026-10-05",
+      "status": 200,
+      "response": [
+        {
+          "id": "ed580d1f-7149-4917-be7c-053056ce9f85",
+          "category": "nutrition",
+          "title": "Nutella snack",
+          "entryDate": "2026-10-05",
+          "occurredAt": "2026-10-05T10:30:00.000Z",
+          "recordedTimezone": "Asia/Kolkata",
+          "inputSource": "text",
+          "note": "15 g of Nutella, nutrition confirmed from Open Food Facts",
+          "attachments": [],
+          "data": {
+            "items": [
+              {
+                "id": "4dbe56bc-f1ec-4523-b634-ef7ae3091caf",
+                "fatG": 4.64,
+                "name": "Nutella",
+                "unit": "g",
+                "proteinG": 0.95,
+                "quantity": 15,
+                "reference": {
+                  "unit": "g",
+                  "amount": 100,
+                  "provider": "open-food-facts",
+                  "providerFoodId": "3017624010701"
+                },
+                "caloriesKcal": 80.85,
+                "carbohydratesG": 8.63,
+                "quantitySource": "user_entered",
+                "nutritionSource": "reference"
+              }
+            ],
+            "mealCategory": "snack"
+          },
+          "summary": {
+            "caloriesKcal": 80.85
+          },
+          "ai": {
+            "status": "pending",
+            "errorCode": null,
+            "synopsis": null
+          },
+          "revision": 1,
+          "createdAt": "2026-10-05T10:06:16.570Z",
+          "updatedAt": "2026-10-05T10:06:16.570Z"
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "home?date=2026-10-05",
+      "status": 200,
+      "response": {
+        "date": "2026-10-05",
+        "timezone": "Asia/Kolkata",
+        "day": {
+          "label": "Today",
+          "weekday": "Monday",
+          "previous": "2026-10-04",
+          "next": "2026-10-06",
+          "isToday": true
+        },
+        "schedule": {
+          "wakeTime": null,
+          "sleepTime": null,
+          "crossesMidnight": false
+        },
+        "summary": {
+          "nutrition": {
+            "caloriesConsumedKcal": 80.85,
+            "entryCount": 1
+          },
+          "exercise": {
+            "durationMinutes": 0,
+            "caloriesBurnedKcal": null
+          }
+        },
+        "timeline": [
+          {
+            "type": "entry",
+            "date": "2026-10-05",
+            "time": "16:00",
+            "outsideSchedule": false,
+            "entry": {
+              "id": "ed580d1f-7149-4917-be7c-053056ce9f85",
+              "category": "nutrition",
+              "title": "Nutella snack",
+              "entryDate": "2026-10-05",
+              "occurredAt": "2026-10-05T10:30:00.000Z",
+              "recordedTimezone": "Asia/Kolkata",
+              "inputSource": "text",
+              "note": "15 g of Nutella, nutrition confirmed from Open Food Facts",
+              "attachments": [],
+              "data": {
+                "items": [
+                  {
+                    "id": "4dbe56bc-f1ec-4523-b634-ef7ae3091caf",
+                    "fatG": 4.64,
+                    "name": "Nutella",
+                    "unit": "g",
+                    "proteinG": 0.95,
+                    "quantity": 15,
+                    "reference": {
+                      "unit": "g",
+                      "amount": 100,
+                      "provider": "open-food-facts",
+                      "providerFoodId": "3017624010701"
+                    },
+                    "caloriesKcal": 80.85,
+                    "carbohydratesG": 8.63,
+                    "quantitySource": "user_entered",
+                    "nutritionSource": "reference"
+                  }
+                ],
+                "mealCategory": "snack"
+              },
+              "summary": {
+                "caloriesKcal": 80.85
+              },
+              "ai": {
+                "status": "pending",
+                "errorCode": null,
+                "synopsis": null
+              },
+              "revision": 1,
+              "createdAt": "2026-10-05T10:06:16.570Z",
+              "updatedAt": "2026-10-05T10:06:16.570Z"
+            }
+          }
+        ],
+        "sections": [
+          {
+            "type": "nutrition_summary",
+            "data": {
+              "caloriesConsumedKcal": 80.85,
+              "entryCount": 1
+            }
+          },
+          {
+            "type": "exercise_summary",
+            "data": {
+              "durationMinutes": 0,
+              "caloriesBurnedKcal": null
+            }
+          },
+          {
+            "type": "timeline",
+            "data": {
+              "entries": [
+                {
+                  "type": "entry",
+                  "date": "2026-10-05",
+                  "time": "16:00",
+                  "outsideSchedule": false,
+                  "entry": {
+                    "id": "ed580d1f-7149-4917-be7c-053056ce9f85",
+                    "category": "nutrition",
+                    "title": "Nutella snack",
+                    "entryDate": "2026-10-05",
+                    "occurredAt": "2026-10-05T10:30:00.000Z",
+                    "recordedTimezone": "Asia/Kolkata",
+                    "inputSource": "text",
+                    "note": "15 g of Nutella, nutrition confirmed from Open Food Facts",
+                    "attachments": [],
+                    "data": {
+                      "items": [
+                        {
+                          "id": "4dbe56bc-f1ec-4523-b634-ef7ae3091caf",
+                          "fatG": 4.64,
+                          "name": "Nutella",
+                          "unit": "g",
+                          "proteinG": 0.95,
+                          "quantity": 15,
+                          "reference": {
+                            "unit": "g",
+                            "amount": 100,
+                            "provider": "open-food-facts",
+                            "providerFoodId": "3017624010701"
+                          },
+                          "caloriesKcal": 80.85,
+                          "carbohydratesG": 8.63,
+                          "quantitySource": "user_entered",
+                          "nutritionSource": "reference"
+                        }
+                      ],
+                      "mealCategory": "snack"
+                    },
+                    "summary": {
+                      "caloriesKcal": 80.85
+                    },
+                    "ai": {
+                      "status": "pending",
+                      "errorCode": null,
+                      "synopsis": null
+                    },
+                    "revision": 1,
+                    "createdAt": "2026-10-05T10:06:16.570Z",
+                    "updatedAt": "2026-10-05T10:06:16.570Z"
+                  }
+                }
+              ],
+              "startTime": null,
+              "endTime": null
+            }
+          }
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "nutrition/search?provider=unknown&q=Nutella",
+      "status": 400,
+      "response": {
+        "message": "provider must be usda-fdc or open-food-facts",
+        "error": "Bad Request",
+        "statusCode": 400
+      }
+    },
+    {
+      "method": "GET",
+      "path": "nutrition/foods/invalid?provider=open-food-facts",
+      "status": 400,
+      "response": {
+        "message": "Invalid product barcode",
+        "error": "Bad Request",
+        "statusCode": 400
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "entries/ed580d1f-7149-4917-be7c-053056ce9f85",
+      "status": 204,
+      "response": null
+    },
+    {
+      "method": "GET",
+      "path": "home?date=2026-10-05",
+      "status": 200,
+      "response": {
+        "date": "2026-10-05",
+        "timezone": "Asia/Kolkata",
+        "day": {
+          "label": "Today",
+          "weekday": "Monday",
+          "previous": "2026-10-04",
+          "next": "2026-10-06",
+          "isToday": true
+        },
+        "schedule": {
+          "wakeTime": null,
+          "sleepTime": null,
+          "crossesMidnight": false
+        },
+        "summary": {
+          "nutrition": {
+            "caloriesConsumedKcal": 0,
+            "entryCount": 0
+          },
+          "exercise": {
+            "durationMinutes": 0,
+            "caloriesBurnedKcal": null
+          }
+        },
+        "timeline": [],
+        "sections": [
+          {
+            "type": "nutrition_summary",
+            "data": {
+              "caloriesConsumedKcal": 0,
+              "entryCount": 0
+            }
+          },
+          {
+            "type": "exercise_summary",
+            "data": {
+              "durationMinutes": 0,
+              "caloriesBurnedKcal": null
+            }
+          },
+          {
+            "type": "timeline",
+            "data": {
+              "entries": [],
+              "startTime": null,
+              "endTime": null
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "checks": [
+    "Live Open Food Facts full-text search and barcode lookup",
+    "15 g portion calculation with provider provenance",
+    "Confirmed snapshot survives entry create/detail/list",
+    "Home aggregates Open Food Facts nutrition",
+    "Invalid provider/barcode rejected",
+    "Soft-deletion restores baseline totals"
+  ]
+}

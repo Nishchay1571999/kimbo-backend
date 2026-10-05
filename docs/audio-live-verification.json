@@ -1,0 +1,14 @@
+{
+  "account": "test@email.com",
+  "checkedAt": "2026-10-05T09:38:39.019Z",
+  "results": [
+    {
+      "kind": "audio",
+      "decodedBytes": 32044,
+      "base64RoundTrip": true,
+      "providerModelId": "google/gemini-2.5-flash-lite",
+      "status": "pending",
+      "errorCode": "AI_INSUFFICIENT_CREDITS"
+    }
+  ]
+}
