@@ -8,11 +8,18 @@ import { CreateAccountUseCase } from './application/create-account/create-accoun
 import { USER_REPOSITORY } from './domain/user.repository.js';
 import { PrismaUserRepository } from './infrastructure/prisma-user.repository.js';
 import { AccountsController } from './presentation/accounts.controller.js';
+import { GetSessionUseCase } from './application/get-session.use-case.js';
+import { CompleteOnboardingUseCase } from './application/complete-onboarding.use-case.js';
+import { ONBOARDING_REPOSITORY } from './domain/onboarding.repository.js';
+import { PrismaOnboardingRepository } from './infrastructure/prisma-onboarding.repository.js';
 
 @Module({
   imports: [PrismaModule],
   controllers: [AccountsController],
   providers: [
+    GetSessionUseCase,
+    CompleteOnboardingUseCase,
+    { provide: ONBOARDING_REPOSITORY, useClass: PrismaOnboardingRepository },
     CreateAccountUseCase,
     ContinueAsGuestUseCase,
     SignInUseCase,

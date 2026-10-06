@@ -11,7 +11,7 @@ import type {
   RegisterGuestInput,
 } from '../domain/user.js';
 
-const userSelection = {
+export const userSelection = {
   id: true,
   name: true,
   email: true,
@@ -23,6 +23,13 @@ const userSelection = {
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
   constructor(@Inject(PrismaService) private readonly prisma: PrismaService) {}
+
+  findByAuthProviderId(token: string): Promise<User | null> {
+    return this.prisma.client.user.findUnique({
+      where: { authProviderId: token },
+      select: userSelection,
+    });
+  }
 
   findByEmail(email: string): Promise<User | null> {
     return this.prisma.client.user.findUnique({

@@ -8,6 +8,8 @@ import {
   Inject,
   HttpCode,
   Header,
+  Headers,
+  Get,
   Post,
   UseFilters,
   UsePipes,
@@ -27,6 +29,8 @@ import { SignInUseCase } from '../application/sign-in/sign-in.use-case.js';
 import { SignInDto } from './dto/sign-in.dto.js';
 import { SignInResponseDto } from './dto/sign-in-response.dto.js';
 import { AccountResponseDto } from './dto/account-response.dto.js';
+import { GetSessionUseCase } from '../application/get-session.use-case.js';
+import { CompleteOnboardingUseCase } from '../application/complete-onboarding.use-case.js';
 
 @Catch(DomainError)
 class AccountErrorFilter implements ExceptionFilter<DomainError> {
@@ -55,12 +59,27 @@ class AccountErrorFilter implements ExceptionFilter<DomainError> {
 @UseFilters(AccountErrorFilter)
 export class AccountsController {
   constructor(
+    @Inject(CompleteOnboardingUseCase) private readonly completeOnboarding: CompleteOnboardingUseCase,
+    @Inject(GetSessionUseCase) private readonly getSession: GetSessionUseCase,
     @Inject(CreateAccountUseCase)
     private readonly createAccount: CreateAccountUseCase,
     @Inject(SignInUseCase) private readonly signIn: SignInUseCase,
     @Inject(ContinueAsGuestUseCase)
     private readonly continueAsGuest: ContinueAsGuestUseCase,
   ) {}
+
+  @Post('onboarding')
+  @HttpCode(200)
+  @Header('Cache-Control', 'no-store')
+  async onboarding(@Headers('authorization') authorization: string | undefined, @Body() body: unknown): Promise<AccountResponseDto> {
+    return AccountResponseDto.fromUser(await this.completeOnboarding.execute(authorization, body));
+  }
+
+  @Get('me')
+  @Header('Cache-Control', 'no-store')
+  async me(@Headers('authorization') authorization?: string): Promise<AccountResponseDto> {
+    return AccountResponseDto.fromUser(await this.getSession.execute(authorization));
+  }
 
   @Post()
   @Header('Cache-Control', 'no-store')

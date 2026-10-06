@@ -7,16 +7,21 @@ import { PrismaService } from './../src/common/database/prisma.service.js';
 import { vi } from 'vitest';
 import { USER_REPOSITORY } from '../src/modules/identity/domain/user.repository.js';
 import { ConflictError } from '../src/common/errors/conflict.error.js';
+import { ONBOARDING_REPOSITORY } from '../src/modules/identity/domain/onboarding.repository.js';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
   const query = vi.fn();
   const findByEmail = vi.fn();
+  const findByAuthProviderId = vi.fn();
+  const completeOnboarding = vi.fn();
   const create = vi.fn();
   const registerGuest = vi.fn();
   const findCredentialsByEmail = vi.fn();
 
   beforeEach(async () => {
+    completeOnboarding.mockReset();
+    findByAuthProviderId.mockReset().mockResolvedValue(null);
     registerGuest.mockReset();
     findCredentialsByEmail.mockReset().mockResolvedValue(null);
     findByEmail.mockReset().mockResolvedValue(null);
@@ -32,7 +37,9 @@ describe('AppController (e2e)', () => {
       .overrideProvider(PrismaService)
       .useValue({ client: { $queryRaw: query } })
       .overrideProvider(USER_REPOSITORY)
-      .useValue({ findByEmail, findCredentialsByEmail, create, registerGuest })
+      .useValue({ findByEmail, findByAuthProviderId, findCredentialsByEmail, create, registerGuest })
+      .overrideProvider(ONBOARDING_REPOSITORY)
+      .useValue({ complete: completeOnboarding })
       .compile();
 
     app = moduleFixture.createNestApplication();
@@ -44,6 +51,45 @@ describe('AppController (e2e)', () => {
       .get('/')
       .expect(200)
       .expect('Hello World!');
+  });
+
+  it('restores an incomplete account without exposing credentials', async () => {
+    findByAuthProviderId.mockResolvedValue({
+      id: 'c115c629-d911-42aa-8e51-4a7d6db658ed', name: 'Test', email: 'test@email.com',
+      accountStatus: 'member', timezone: 'Asia/Kolkata', onboardingCompletedAt: null,
+      passwordHash: 'private', authProviderId: 'private-token',
+    });
+    const response = await request(app.getHttpServer()).get('/v1/accounts/me')
+      .set('Authorization', 'Bearer private-token').expect('Cache-Control', 'no-store').expect(200);
+    expect(response.body).toEqual({
+      id: 'c115c629-d911-42aa-8e51-4a7d6db658ed', name: 'Test', email: 'test@email.com',
+      accountStatus: 'member', timezone: 'Asia/Kolkata', onboardingCompleted: false,
+    });
+    expect(findByAuthProviderId).toHaveBeenCalledWith('private-token');
+  });
+
+  it.each([undefined, 'Basic token', 'Bearer', 'Bearer token extra', 'Bearer unknown'])
+    ('rejects invalid session credentials %s', async (authorization) => {
+      const call = request(app.getHttpServer()).get('/v1/accounts/me');
+      if (authorization) call.set('Authorization', authorization);
+      await call.expect(401);
+    });
+
+  it('completes onboarding using the bearer owner and rejects client ownership fields', async () => {
+    const user = { id: 'c115c629-d911-42aa-8e51-4a7d6db658ed', name: 'Test', email: 'test@email.com',
+      accountStatus: 'member', timezone: 'Asia/Kolkata', onboardingCompletedAt: null };
+    findByAuthProviderId.mockResolvedValue(user);
+    completeOnboarding.mockResolvedValue({ ...user, onboardingCompletedAt: new Date() });
+    const body = { age: 28, heightCm: 152.4, weightKg: 72.5, gender: 'unspecified', goalIntention: 'maintain',
+      healthyEatingFrequency: 'most_of_the_time', exerciseFrequency: 'once_or_twice', wakeTime: '07:00', sleepTime: '00:30' };
+    const response = await request(app.getHttpServer()).post('/v1/accounts/onboarding')
+      .set('Authorization', 'Bearer test-token').send(body).expect('Cache-Control', 'no-store').expect(200);
+    expect(response.body).toMatchObject({ id: user.id, onboardingCompleted: true });
+    expect(completeOnboarding).toHaveBeenCalledWith(user.id, body);
+    await request(app.getHttpServer()).post('/v1/accounts/onboarding')
+      .set('Authorization', 'Bearer test-token').send({ ...body, userId: 'spoofed' }).expect(400);
+    expect(completeOnboarding).toHaveBeenCalledOnce();
+    await request(app.getHttpServer()).post('/v1/accounts/onboarding').send(body).expect(401);
   });
 
   it('/health reports readiness after querying the database', async () => {

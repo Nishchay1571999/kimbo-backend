@@ -8,6 +8,9 @@ import type { UserRepository } from '../../domain/user.repository.js';
 import type { NewUser, User, RegisterGuestInput } from '../../domain/user.js';
 
 class InMemoryUserRepository implements UserRepository {
+  async findByAuthProviderId(token: string): Promise<User | null> {
+    return this.users.find((user) => user.authProviderId === token) ?? null;
+  }
   readonly users: (User & Pick<NewUser, 'authProviderId' | 'passwordHash'>)[] =
     [];
 
@@ -209,6 +212,7 @@ describe('CreateAccountUseCase', () => {
       'Duplicate email',
     );
     const repository: UserRepository = {
+      findByAuthProviderId: async () => null,
       findByEmail: async () => null,
       findCredentialsByEmail: async () => null,
       registerGuest: async () => {

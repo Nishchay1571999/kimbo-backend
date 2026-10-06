@@ -8,6 +8,7 @@ import type {
 export const USER_REPOSITORY = Symbol('USER_REPOSITORY');
 
 export interface UserRepository {
+  findByAuthProviderId(token: string): Promise<User | null>;
   findByEmail(email: string): Promise<User | null>;
   findCredentialsByEmail(email: string): Promise<UserCredentials | null>;
   /** Atomically converts only a guest; preserves its ID, token, and owned data. */

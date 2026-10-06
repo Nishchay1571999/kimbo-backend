@@ -86,6 +86,28 @@ Unit and HTTP tests do not require live database access; the HTTP test replaces 
 
 ## Accounts, guests, and sign-in
 
+`POST /v1/accounts/onboarding` requires the account's bearer token and accepts
+`age`, `heightCm`, `weightKg`, `gender`, `goalIntention`, `healthyEatingFrequency`,
+`exerciseFrequency`, `wakeTime` and `sleepTime`. Lifestyle enum values use
+underscores; schedule values use 24-hour `HH:mm` in the account's timezone.
+Unknown fields are rejected, and overnight sleep is supported. It returns HTTP
+200 with the public account and `onboardingCompleted: true`.
+
+The profile, initial weight observation and completion flag commit in one
+transaction. A user row lock serializes submissions; retries after completion
+return the existing account without overwriting facts or adding weight records.
+An existing incomplete profile returns 409 `ONBOARDING_PROFILE_EXISTS`.
+No schema migration is required for this endpoint.
+
+`GET /v1/accounts/me` requires a bearer token and returns the public account
+fields, including `onboardingCompleted`. It works before onboarding completion,
+does not use the development identity stub, and never returns tokens or password
+hashes. Invalid or missing credentials return HTTP 401 `INVALID_SESSION`.
+
+Set `CORS_ORIGINS` to a comma-separated list of allowed web app origins. The
+default permits local Expo web origins on ports 8081 and 19006; production web
+origins must be configured explicitly.
+
 `POST /v1/accounts/continue-as-guest` accepts `{}` or an optional IANA `timezone`.
 It creates a guest with null name, email and password hash, incomplete onboarding,
 and a random UUID `auth_provider_id`. Timezone defaults to `Asia/Kolkata`.
