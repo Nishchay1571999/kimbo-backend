@@ -1,4 +1,5 @@
 import type { Entry } from '../../entries/domain/entry.types.js';
+import type { DayGoal, DayStatus } from './day-goal.js';
 export type TimelineItem =
   | { type: 'boundary'; boundary: 'wake' | 'sleep'; date: string; time: string }
   | {
@@ -27,6 +28,8 @@ export interface Home {
     nutrition: { caloriesConsumedKcal: number; entryCount: number };
     exercise: { durationMinutes: number; caloriesBurnedKcal: number | null };
   };
+  /** Null without a confirmed target: no allowance is ever invented. */
+  goal: DayGoal | null;
   timeline: TimelineItem[];
   sections: (
     | { type: 'nutrition_summary'; data: Home['summary']['nutrition'] }
@@ -40,4 +43,17 @@ export interface Home {
         };
       }
   )[];
+}
+export interface WeekDay {
+  date: string;
+  /** 'logged' is used when there is no confirmed target to compare against. */
+  status: DayStatus | 'logged' | 'future';
+  caloriesKcal: number;
+  deltaKcal: number | null;
+}
+export interface Week {
+  from: string;
+  to: string;
+  hasTarget: boolean;
+  days: WeekDay[];
 }

@@ -37,6 +37,11 @@ enum HealthyEatingFrequency {
   every_time
 }
 
+enum TargetMethod {
+  suggested
+  custom
+}
+
 enum EntityTag {
   note
   nutrition
@@ -102,6 +107,7 @@ model User {
   updatedAt             DateTime      @updatedAt @map("updated_at") @db.Timestamptz(3)
 
   healthProfile UserHealthProfile?
+  goalTarget    UserGoalTarget?
   preferences   UserPreferences?
   entities      Entity[]
   healthRecords HealthRecord[]
@@ -140,6 +146,21 @@ model UserPreferences {
   preferredChatModel   AiModel? @relation(fields: [preferredChatModelId], references: [id], onDelete: SetNull)
 
   @@map("user_preferences")
+}
+
+/// Daily targets the user explicitly confirmed. Without a row, no allowance or
+/// remaining-calorie figure is ever shown.
+model UserGoalTarget {
+  userId       String       @id @map("user_id") @db.Uuid
+  caloriesKcal Int          @map("calories_kcal")
+  proteinG     Int          @map("protein_g")
+  method       TargetMethod
+  confirmedAt  DateTime     @map("confirmed_at") @db.Timestamptz(3)
+  createdAt    DateTime     @default(now()) @map("created_at") @db.Timestamptz(3)
+  updatedAt    DateTime     @updatedAt @map("updated_at") @db.Timestamptz(3)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@map("user_goal_targets")
 }
 
 model Entity {

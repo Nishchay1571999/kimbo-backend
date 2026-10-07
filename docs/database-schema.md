@@ -54,6 +54,10 @@ Validate positive duration and a named activity. Note tag_data may be `{}`. User
 
 entry_date is the user-assigned reporting date; occurred_at is the actual instant. recorded_timezone preserves its interpretation. The service must define date assignment consistently and never silently regroup old entries when timezone changes. Daily calories derive from confirmed, nondeleted nutrition entities; exercise expenditure remains separate. There is no calorie allowance or remaining-calorie calculation without a confirmed target.
 
+## Confirmed goal targets
+
+`user_goal_targets` holds at most one row per user: daily `calories_kcal` (1000–5000), `protein_g` (20–300), `method` (`suggested` when the user accepted the server suggestion unchanged, otherwise `custom`) and `confirmed_at`. The server may *suggest* a target (Mifflin-St Jeor resting energy × an activity factor from `exercise_frequency`, adjusted for `goal_intention`; protein from body weight), but only an explicit user confirmation creates the row. Without a row, Home returns `goal: null`, the week strip reports `logged`/`not_logged`, and the assistant is instructed never to invent an allowance.
+
 ## Append-only health observations
 
 Every record has a metric, value, unit, event time and source. Do not infer a new weight from the prior value. Extracted measurements require explicit input and user confirmation before being treated as accepted observations.

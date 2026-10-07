@@ -10,6 +10,9 @@ import {
   buildHome,
   GetHomeUseCase,
 } from '../../home/application/get-home/get-home.use-case.js';
+import { dayStatus } from '../../home/domain/day-goal.js';
+import { GOAL_TARGET_REPOSITORY } from '../../goals/domain/goal-target.js';
+import type { GoalTargetRepository } from '../../goals/domain/goal-target.js';
 
 export function healthPeriod(from: string, to: string) {
   reportingDate(from);
@@ -72,6 +75,8 @@ export class HealthProjectionService {
     @Inject(HEALTH_PROFILE_REPOSITORY)
     private readonly profiles: HealthProfileRepository,
     @Inject(GetHomeUseCase) private readonly home: GetHomeUseCase,
+    @Inject(GOAL_TARGET_REPOSITORY)
+    private readonly targets: GoalTargetRepository,
   ) {}
   async day(userId: string, date: string) {
     const home = await this.home.execute(userId, date);
@@ -83,6 +88,8 @@ export class HealthProjectionService {
       timezone: home.timezone,
       schedule: home.schedule,
       summary: home.summary,
+      // Server-computed comparison with the user's confirmed target (null if none).
+      goal: home.goal,
       entries: entries.map(healthEntry),
     };
     return {
@@ -97,9 +104,10 @@ export class HealthProjectionService {
   }
   async range(userId: string, from: string, to: string) {
     const period = healthPeriod(from, to);
-    const [profile, entries] = await Promise.all([
+    const [profile, entries, target] = await Promise.all([
       this.profiles.get(userId),
       this.entries.listRange(userId, from, to),
+      this.targets.get(userId),
     ]);
     const groups = new Map<string, Entry[]>();
     for (const entry of entries)
@@ -111,7 +119,20 @@ export class HealthProjectionService {
       const date = shiftDate(from, index);
       const items = groups.get(date) ?? [];
       const home = buildHome(date, profile, items);
-      return { date, tracked: items.length > 0, ...home.summary };
+      const consumed = home.summary.nutrition.caloriesConsumedKcal;
+      const logged = home.summary.nutrition.entryCount > 0;
+      return {
+        date,
+        tracked: items.length > 0,
+        ...home.summary,
+        // Server-computed comparison with the confirmed target; null when unknown.
+        goal: target
+          ? {
+              status: dayStatus(consumed, target.caloriesKcal, logged, home.day.isToday),
+              deltaKcal: logged ? Math.round(consumed - target.caloriesKcal) : null,
+            }
+          : null,
+      };
     });
     const nutritionDays = days.filter((day) => day.nutrition.entryCount > 0);
     const exerciseDays = days.filter((day) => day.exercise.durationMinutes > 0);
@@ -122,6 +143,9 @@ export class HealthProjectionService {
       from,
       to,
       timezone: profile.timezone,
+      target: target
+        ? { caloriesKcal: target.caloriesKcal, proteinG: target.proteinG }
+        : null,
       summary: {
         daysInRange: period.days,
         daysTracked: days.filter((day) => day.tracked).length,

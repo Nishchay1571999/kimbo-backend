@@ -17,12 +17,27 @@ import type {
   DayProfile,
   HealthProfileRepository,
 } from '../../domain/health-profile.repository.js';
-import type { Home, TimelineItem } from '../../domain/home.types.js';
+import type {
+  Home,
+  TimelineItem,
+  Week,
+} from '../../domain/home.types.js';
+import { buildDayGoal, dayStatus } from '../../domain/day-goal.js';
+import { GOAL_TARGET_REPOSITORY } from '../../../goals/domain/goal-target.js';
+import type {
+  GoalTarget,
+  GoalTargetRepository,
+} from '../../../goals/domain/goal-target.js';
+export interface GoalContext {
+  target: Pick<GoalTarget, 'caloriesKcal' | 'proteinG'>;
+  recentEntries: Entry[];
+}
 export function buildHome(
   date: string,
   profile: DayProfile,
   entries: Entry[],
   now = new Date(),
+  goalContext: GoalContext | null = null,
 ): Home {
   const { timezone, wakeTime, sleepTime } = profile;
   const crossesMidnight = !!wakeTime && !!sleepTime && sleepTime < wakeTime;
@@ -107,6 +122,15 @@ export function buildHome(
     },
     schedule: { wakeTime, sleepTime, crossesMidnight },
     summary,
+    goal: goalContext
+      ? buildDayGoal({
+          target: goalContext.target,
+          entries,
+          isToday,
+          localTime: localTime(now, timezone),
+          recentEntries: goalContext.recentEntries,
+        })
+      : null,
     timeline,
     sections: [
       { type: 'nutrition_summary', data: summary.nutrition },
@@ -124,13 +148,68 @@ export class GetHomeUseCase {
     @Inject(ENTRY_REPOSITORY) private readonly entries: EntryRepository,
     @Inject(HEALTH_PROFILE_REPOSITORY)
     private readonly profiles: HealthProfileRepository,
+    @Inject(GOAL_TARGET_REPOSITORY)
+    private readonly targets: GoalTargetRepository,
   ) {}
   async execute(userId: string, date?: string): Promise<Home> {
-    const profile = await this.profiles.get(userId);
+    const [profile, target] = await Promise.all([
+      this.profiles.get(userId),
+      this.targets.get(userId),
+    ]);
     const day =
       date === undefined
         ? localDate(new Date(), profile.timezone)
         : reportingDate(date);
-    return buildHome(day, profile, await this.entries.list(userId, day));
+    const [entries, recentEntries] = await Promise.all([
+      this.entries.list(userId, day),
+      target
+        ? this.entries.listRange(userId, shiftDate(day, -7), shiftDate(day, -1))
+        : Promise.resolve([]),
+    ]);
+    return buildHome(
+      day,
+      profile,
+      entries,
+      new Date(),
+      target ? { target, recentEntries } : null,
+    );
+  }
+  /** Monday–Sunday statuses for the week containing `date`. */
+  async week(userId: string, date?: string): Promise<Week> {
+    const [profile, target] = await Promise.all([
+      this.profiles.get(userId),
+      this.targets.get(userId),
+    ]);
+    const today = localDate(new Date(), profile.timezone);
+    date = date === undefined ? today : reportingDate(date);
+    const from = shiftDate(date, -((new Date(date).getUTCDay() + 6) % 7));
+    const to = shiftDate(from, 6);
+    const entries = await this.entries.listRange(userId, from, to);
+    const days = Array.from({ length: 7 }, (_, index) => {
+      const day = shiftDate(from, index);
+      const meals = entries.filter(
+        (e) => e.entryDate === day && e.category === 'nutrition',
+      );
+      const caloriesKcal = Math.round(
+        meals.reduce((sum, e) => sum + (e.summary.caloriesKcal ?? 0), 0),
+      );
+      const logged = entries.some((e) => e.entryDate === day);
+      if (day > today)
+        return { date: day, status: 'future' as const, caloriesKcal, deltaKcal: null };
+      if (!target)
+        return {
+          date: day,
+          status: logged ? ('logged' as const) : ('not_logged' as const),
+          caloriesKcal,
+          deltaKcal: null,
+        };
+      return {
+        date: day,
+        status: dayStatus(caloriesKcal, target.caloriesKcal, meals.length > 0, day === today),
+        caloriesKcal,
+        deltaKcal: meals.length ? caloriesKcal - target.caloriesKcal : null,
+      };
+    });
+    return { from, to, hasTarget: !!target, days };
   }
 }

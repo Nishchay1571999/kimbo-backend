@@ -10,7 +10,7 @@ type WeightObservation = {
   sourceEntityId: string | null;
   sourceRevision: number | null;
 };
-function activeWeight(userId: string) {
+export function activeWeight(userId: string) {
   return Prisma.sql`r.user_id = ${userId}::uuid AND r.metric_type = 'weight' AND NOT r.is_void
     AND NOT EXISTS (SELECT 1 FROM health_records s WHERE s.supersedes_record_id = r.id)
     AND (r.source_entity_id IS NULL OR (e.user_id = r.user_id AND e.deleted_at IS NULL AND e.revision = r.source_revision))`;

@@ -55,10 +55,16 @@ const repository = {
   listRange: vi.fn(async () => entries),
 };
 const profiles = { get: vi.fn(async () => profile) };
+const targets = {
+  get: vi.fn(async () => null),
+  save: vi.fn(),
+  suggestionInput: vi.fn(),
+};
 const service = new HealthProjectionService(
   repository,
   profiles,
-  new GetHomeUseCase(repository, profiles),
+  new GetHomeUseCase(repository, profiles, targets),
+  targets,
 );
 beforeEach(() => vi.clearAllMocks());
 it('fetches a range once and excludes missing nutrition days from averages', async () => {

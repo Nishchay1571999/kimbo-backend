@@ -14,4 +14,10 @@ export class HomeController {
   @Get() get(@CurrentUser() user: UserIdentity, @Query('date') date?: string) {
     return this.getHome.execute(user.userId, date);
   }
+  @Get('week') week(
+    @CurrentUser() user: UserIdentity,
+    @Query('date') date?: string,
+  ) {
+    return this.getHome.week(user.userId, date);
+  }
 }

@@ -183,6 +183,15 @@ are marked `[Dummy]`; assistant metadata marks replies and retrieval snapshots
 as simulated, with no actual-model attribution. Entry analysis is not requested.
 The generated summary is saved to `docs/test-account-seed-verification.json`.
 
+Daily goals: `GET/PUT /v1/goals/target` suggest and store a user-confirmed
+calorie and protein target. Home's `goal` block and `/v1/home/week` compare each
+day with it using deterministic rules (see the product API contract), and the
+chat context receives the same server-computed numbers so the assistant explains
+days relative to the goal instead of restating totals. Model selection is hidden
+from the main app flow ("Auto" = the server default with one registered fallback);
+each reply still records `actual_model_id`, which the app shows under a message's
+Details together with its sources.
+
 Chat threads, durable messages, read-only health tools, source snapshots and
 NDJSON streaming are implemented using the existing tables and OpenRouter Agent
 SDK. See [the chat API contract](docs/chat-api.md) for request/event examples,

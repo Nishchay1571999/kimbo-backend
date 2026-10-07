@@ -27,7 +27,10 @@ without creating onboarding facts or changing the account.
 | GET | `/v1/nutrition/foods/171077` | Normalized food reference; optional provider |
 | POST | `/v1/nutrition/calculate` | Portion nutrition with reference provenance |
 | GET | `/v1/ai/models` | Enabled image-capable models from ai_models |
-| GET | `/v1/home?date=2026-10-05` | Day, schedule, summaries, timeline and sections |
+| GET | `/v1/home?date=2026-10-05` | Day, schedule, summaries, goal comparison, timeline and sections |
+| GET | `/v1/home/week?date=2026-10-05` | Monday–Sunday day statuses for the week containing the date |
+| GET | `/v1/goals/target` | `{ target \| null, suggestion \| null }` |
+| PUT | `/v1/goals/target` | Confirm `{ caloriesKcal, proteinG, method }` |
 
 All these routes require a bearer identity or explicitly enabled local stub.
 Entry IDs must be UUIDs. Requests reject unknown fields and invalid category
@@ -199,6 +202,17 @@ Home exposes both `summary`/`timeline` and semantic `sections`:
 `nutrition_summary`, `exercise_summary`, `timeline`. The client chooses its
 components and styling. Day navigation uses calendar dates and `isToday` uses
 the user's timezone.
+
+`goal` is null unless the user confirmed a target. Otherwise it carries the
+target, consumed calories and protein, `remainingKcal`, `deltaKcal`
+(consumed − target), the largest meal and a `status`: `on_track` (within ±10%),
+`over`, `under` (past days only), `in_progress` (today, below the band) or
+`not_logged` (no meals; never treated as zero intake). `insight` is a
+deterministic headline and next step: the main contributor when over (compared
+with the same meal category's average over the previous 7 days), low protein
+(<60% of target, evaluated after 17:00 for today), or a suggested next meal
+sized from the remaining calories and protein. No LLM runs on this path.
+`/v1/home/week` applies the same status rules per day and adds `future`.
 
 ## Background AI
 

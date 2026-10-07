@@ -96,6 +96,18 @@ try {
         create: { userId: user.id, preferredChatModelId: model.id },
         update: {},
       });
+      // A confirmed target so Home and Kimo can compare days against a goal.
+      await tx.userGoalTarget.upsert({
+        where: { userId: user.id },
+        create: {
+          userId: user.id,
+          caloriesKcal: 2100,
+          proteinG: 110,
+          method: 'custom',
+          confirmedAt: new Date(),
+        },
+        update: {},
+      });
       const profile = await profiles.get(user.id);
       const identity = {
         userId: user.id,

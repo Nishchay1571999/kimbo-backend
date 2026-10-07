@@ -1,22 +1,22 @@
 {
   "account": "test@email.com",
   "fixture": "kimbo-dummy-v1",
-  "checkedAt": "2026-10-05T11:35:01.407Z",
-  "anchorDate": "2026-10-05",
-  "from": "2026-09-15",
+  "checkedAt": "2026-10-07T04:18:54.317Z",
+  "anchorDate": "2026-10-07",
+  "from": "2026-09-17",
   "timezone": "Asia/Kolkata",
   "created": {
-    "entries": 0,
-    "healthRecords": 0,
-    "threads": 0,
-    "messages": 0,
+    "entries": 71,
+    "healthRecords": 74,
+    "threads": 3,
+    "messages": 14,
     "profiles": 0
   },
   "counts": {
-    "activeEntries": 71,
-    "healthRecords": 74,
-    "threads": 3,
-    "messages": 14
+    "activeEntries": 142,
+    "healthRecords": 148,
+    "threads": 23,
+    "messages": 94
   },
   "model": {
     "id": "5771ebc7-5049-4987-90dd-01c547a8375d",

@@ -3,6 +3,7 @@ import { NutritionModule } from './modules/nutrition/nutrition.module.js';
 import { HomeModule } from './modules/home/home.module.js';
 import { AiModule } from './modules/ai/ai.module.js';
 import { ChatModule } from './modules/chat/chat.module.js';
+import { GoalsModule } from './modules/goals/goals.module.js';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { createObserveModule } from '@nestjs/observe';
@@ -26,6 +27,7 @@ const optionalModules =
     IdentityModule,
     EntriesModule,
     NutritionModule,
+    GoalsModule,
     HomeModule,
     AiModule,
     ChatModule,

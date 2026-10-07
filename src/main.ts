@@ -12,7 +12,7 @@ async function bootstrap() {
   app.enableShutdownHooks();
   const webOrigins = (process.env.CORS_ORIGINS ?? 'http://localhost:8081,http://localhost:19006')
     .split(',').map((origin) => origin.trim()).filter(Boolean);
-  app.enableCors({ origin: webOrigins, methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  app.enableCors({ origin: webOrigins, methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'] });
   await app.listen(process.env.PORT ?? 3000);
 }
