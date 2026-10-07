@@ -24,7 +24,7 @@ import { GetEntryUseCase } from '../application/get-entry/get-entry.use-case.js'
 import { ListEntriesUseCase } from '../application/list-entries/list-entries.use-case.js';
 import { UpdateEntryUseCase } from '../application/update-entry/update-entry.use-case.js';
 import { DeleteEntryUseCase } from '../application/delete-entry/delete-entry.use-case.js';
-import { entryInput } from '../application/entry-input.js';
+import { entryInput, newEntryInput } from '../application/entry-input.js';
 @Controller('v1/entries')
 @UseGuards(CurrentUserGuard)
 export class EntriesController {
@@ -40,7 +40,7 @@ export class EntriesController {
     private readonly deleteEntry: DeleteEntryUseCase,
   ) {}
   @Post() create(@CurrentUser() user: UserIdentity, @Body() body: unknown) {
-    return this.createEntry.execute(user.userId, entryInput(body, user));
+    return this.createEntry.execute(user.userId, newEntryInput(body, user));
   }
   @Get() list(@CurrentUser() user: UserIdentity, @Query('date') date: string) {
     return this.listEntries.execute(user.userId, date);

@@ -20,5 +20,6 @@ import { NutritionController } from './presentation/nutrition.controller.js';
     SearchFoodUseCase,
     CalculateNutritionUseCase,
   ],
+  exports: [NutritionService],
 })
 export class NutritionModule {}

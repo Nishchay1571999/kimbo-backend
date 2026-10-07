@@ -10,7 +10,7 @@ import {
   buildHome,
   GetHomeUseCase,
 } from '../../home/application/get-home/get-home.use-case.js';
-import { dayStatus } from '../../home/domain/day-goal.js';
+import { dayStatus, exerciseBurn } from '../../home/domain/day-goal.js';
 import { GOAL_TARGET_REPOSITORY } from '../../goals/domain/goal-target.js';
 import type { GoalTargetRepository } from '../../goals/domain/goal-target.js';
 
@@ -120,16 +120,27 @@ export class HealthProjectionService {
       const items = groups.get(date) ?? [];
       const home = buildHome(date, profile, items);
       const consumed = home.summary.nutrition.caloriesConsumedKcal;
+      const burn = exerciseBurn(items);
+      const netKcal = roundToTwoDecimals(consumed - burn.caloriesKcal);
       const logged = home.summary.nutrition.entryCount > 0;
       return {
         date,
         tracked: items.length > 0,
         ...home.summary,
-        // Server-computed comparison with the confirmed target; null when unknown.
+        // consumed − burned; exercise without an estimate counts as 0.
+        netKcal,
+        // Server-computed comparison of net calories with the confirmed target; null when unknown.
         goal: target
           ? {
-              status: dayStatus(consumed, target.caloriesKcal, logged, home.day.isToday),
-              deltaKcal: logged ? Math.round(consumed - target.caloriesKcal) : null,
+              status: dayStatus(
+                netKcal,
+                target.caloriesKcal,
+                logged,
+                home.day.isToday,
+              ),
+              deltaKcal: logged
+                ? Math.round(netKcal - target.caloriesKcal)
+                : null,
             }
           : null,
       };

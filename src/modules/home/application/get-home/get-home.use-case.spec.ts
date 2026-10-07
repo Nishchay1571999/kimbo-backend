@@ -94,3 +94,41 @@ describe('Home reporting and timeline', () => {
     ]);
   });
 });
+describe('GetHomeUseCase.week', () => {
+  it('returns the 7 days ending on the date, capped at today, with net deltas', async () => {
+    const { GetHomeUseCase } = await import('./get-home.use-case.js');
+    const { localDate, shiftDate } =
+      await import('../../../../common/time/calendar.js');
+    const today = localDate(new Date(), 'UTC');
+    const listRange = vi.fn().mockResolvedValue([
+      { ...meal, entryDate: today },
+      { ...exercise, entryDate: today },
+    ]);
+    const useCase = new GetHomeUseCase(
+      { listRange } as never,
+      {
+        get: vi
+          .fn()
+          .mockResolvedValue({
+            timezone: 'UTC',
+            wakeTime: null,
+            sleepTime: null,
+          }),
+      } as never,
+      {
+        get: vi.fn().mockResolvedValue({ caloriesKcal: 2000, proteinG: 100 }),
+      } as never,
+    );
+    const week = await useCase.week('a', shiftDate(today, 30));
+    expect(week.to).toBe(today);
+    expect(week.from).toBe(shiftDate(today, -6));
+    expect(listRange).toHaveBeenCalledWith('a', shiftDate(today, -6), today);
+    expect(week.days.map((d) => d.date)).toEqual(
+      Array.from({ length: 7 }, (_, i) => shiftDate(today, i - 6)),
+    );
+    expect(week.days[6]).toMatchObject({
+      caloriesKcal: 195,
+      deltaKcal: 195 - 300 - 2000,
+    });
+  });
+});

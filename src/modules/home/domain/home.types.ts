@@ -49,6 +49,7 @@ export interface WeekDay {
   /** 'logged' is used when there is no confirmed target to compare against. */
   status: DayStatus | 'logged' | 'future';
   caloriesKcal: number;
+  /** Net (consumed − burned) minus target. */
   deltaKcal: number | null;
 }
 export interface Week {

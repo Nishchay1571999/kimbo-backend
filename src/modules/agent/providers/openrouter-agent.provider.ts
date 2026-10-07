@@ -14,6 +14,7 @@ export class OpenRouterAgentProvider implements AgentProvider {
     const client = new OpenRouter({ apiKey: key });
     for (const [index, model] of request.models.slice(0, 2).entries()) {
       let progressed = false;
+      let streamed = false;
       const result = client.callModel(
         {
           model,
@@ -57,11 +58,15 @@ export class OpenRouterAgentProvider implements AgentProvider {
       try {
         for await (const delta of result.getTextStream()) {
           request.signal.throwIfAborted();
-          if (delta) progressed = true;
+          if (delta) progressed = streamed = true;
           await request.onText(delta);
         }
         const response = await result.getResponse();
-        if (response.status !== 'completed')
+        // A reply cut short by the token or step limit is still a usable answer once text has streamed.
+        if (
+          response.status !== 'completed' &&
+          !(response.status === 'incomplete' && streamed)
+        )
           throw new AgentError('AI_INCOMPLETE_RESPONSE');
         return {
           providerModelId: response.model,
@@ -75,12 +80,21 @@ export class OpenRouterAgentProvider implements AgentProvider {
           typeof error === 'object' && error !== null && 'statusCode' in error
             ? error.statusCode
             : null;
+        const name = error instanceof Error ? error.name : 'UnknownError';
+        // Transient failures before any output are retried once on the registered fallback model.
+        const transient =
+          typeof status === 'number'
+            ? [404, 408, 429, 500, 502, 503, 504].includes(status)
+            : [
+                'ConnectionError',
+                'RequestTimeoutError',
+                'UnexpectedClientError',
+              ].includes(name);
         if (
           index === 0 &&
           request.models.length > 1 &&
           !progressed &&
-          typeof status === 'number' &&
-          [404, 408, 429, 500, 502, 503, 504].includes(status)
+          transient
         ) {
           this.logger.warn(
             'OpenRouter primary unavailable; trying registered fallback',
@@ -97,8 +111,9 @@ export class OpenRouterAgentProvider implements AgentProvider {
                 : status === 401 || status === 403
                   ? 'AI_AUTH_ERROR'
                   : 'AI_PROVIDER_ERROR';
-        this.logger.warn(`OpenRouter agent failed (${code})`);
-        const name = error instanceof Error ? error.name : 'UnknownError';
+        this.logger.warn(
+          `OpenRouter agent failed (${code}, ${name}, status ${String(status)}): ${error instanceof Error ? error.message : String(error)}`,
+        );
         const errorType = [
           'SDKError',
           'SDKValidationError',

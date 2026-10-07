@@ -17,12 +17,12 @@ import type {
   DayProfile,
   HealthProfileRepository,
 } from '../../domain/health-profile.repository.js';
-import type {
-  Home,
-  TimelineItem,
-  Week,
-} from '../../domain/home.types.js';
-import { buildDayGoal, dayStatus } from '../../domain/day-goal.js';
+import type { Home, TimelineItem, Week } from '../../domain/home.types.js';
+import {
+  buildDayGoal,
+  dayStatus,
+  exerciseBurn,
+} from '../../domain/day-goal.js';
 import { GOAL_TARGET_REPOSITORY } from '../../../goals/domain/goal-target.js';
 import type {
   GoalTarget,
@@ -174,7 +174,7 @@ export class GetHomeUseCase {
       target ? { target, recentEntries } : null,
     );
   }
-  /** Monday–Sunday statuses for the week containing `date`. */
+  /** Statuses for the 7 days ending on `date` (capped at today), newest last. */
   async week(userId: string, date?: string): Promise<Week> {
     const [profile, target] = await Promise.all([
       this.profiles.get(userId),
@@ -182,20 +182,27 @@ export class GetHomeUseCase {
     ]);
     const today = localDate(new Date(), profile.timezone);
     date = date === undefined ? today : reportingDate(date);
-    const from = shiftDate(date, -((new Date(date).getUTCDay() + 6) % 7));
-    const to = shiftDate(from, 6);
+    const to = date > today ? today : date;
+    const from = shiftDate(to, -6);
     const entries = await this.entries.listRange(userId, from, to);
     const days = Array.from({ length: 7 }, (_, index) => {
       const day = shiftDate(from, index);
-      const meals = entries.filter(
-        (e) => e.entryDate === day && e.category === 'nutrition',
-      );
+      const dayEntries = entries.filter((e) => e.entryDate === day);
+      const meals = dayEntries.filter((e) => e.category === 'nutrition');
       const caloriesKcal = Math.round(
         meals.reduce((sum, e) => sum + (e.summary.caloriesKcal ?? 0), 0),
       );
+      const netKcal = Math.round(
+        caloriesKcal - exerciseBurn(dayEntries).caloriesKcal,
+      );
       const logged = entries.some((e) => e.entryDate === day);
       if (day > today)
-        return { date: day, status: 'future' as const, caloriesKcal, deltaKcal: null };
+        return {
+          date: day,
+          status: 'future' as const,
+          caloriesKcal,
+          deltaKcal: null,
+        };
       if (!target)
         return {
           date: day,
@@ -205,9 +212,14 @@ export class GetHomeUseCase {
         };
       return {
         date: day,
-        status: dayStatus(caloriesKcal, target.caloriesKcal, meals.length > 0, day === today),
+        status: dayStatus(
+          netKcal,
+          target.caloriesKcal,
+          meals.length > 0,
+          day === today,
+        ),
         caloriesKcal,
-        deltaKcal: meals.length ? caloriesKcal - target.caloriesKcal : null,
+        deltaKcal: meals.length ? netKcal - target.caloriesKcal : null,
       };
     });
     return { from, to, hasTarget: !!target, days };

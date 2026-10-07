@@ -13,6 +13,7 @@ import type {
   Attachment,
   EntryContent,
   EntryData,
+  ExerciseData,
   FoodItem,
 } from '../domain/entry.types.js';
 function choice<T extends string>(
@@ -40,6 +41,7 @@ export function categoryData(
       'intensity',
       'estimatedCaloriesBurnedKcal',
       'calorieEstimationSource',
+      'activities',
     ]);
     const burned = optionalMacro(
       data.estimatedCaloriesBurnedKcal,
@@ -51,7 +53,7 @@ export function categoryData(
         : text(data.calorieEstimationSource, 'calorieEstimationSource');
     if (burned !== null && !source)
       throw new BadRequestException('Calorie estimate requires a source');
-    return {
+    const exercise: ExerciseData = {
       activityName: text(data.activityName, 'activityName'),
       durationMinutes: number(data.durationMinutes, 'durationMinutes', true),
       intensity: choice(
@@ -62,6 +64,43 @@ export function categoryData(
       estimatedCaloriesBurnedKcal: burned,
       calorieEstimationSource: source,
     };
+    if (data.activities !== undefined) {
+      if (
+        !Array.isArray(data.activities) ||
+        data.activities.length === 0 ||
+        data.activities.length > 20
+      )
+        throw new BadRequestException('activities must contain 1–20 items');
+      exercise.activities = data.activities.map((raw) => {
+        const a = object(raw, 'activity');
+        keys(a, [
+          'activityName',
+          'durationMinutes',
+          'intensity',
+          'met',
+          'caloriesBurnedKcal',
+        ]);
+        return {
+          activityName: text(a.activityName, 'activity.activityName'),
+          durationMinutes: number(
+            a.durationMinutes,
+            'activity.durationMinutes',
+            true,
+          ),
+          intensity: choice(
+            a.intensity,
+            ['light', 'moderate', 'vigorous'],
+            'activity.intensity',
+          ),
+          met: optionalMacro(a.met, 'activity.met'),
+          caloriesBurnedKcal: number(
+            a.caloriesBurnedKcal,
+            'activity.caloriesBurnedKcal',
+          ),
+        };
+      });
+    }
+    return exercise;
   }
   keys(data, ['mealCategory', 'items']);
   if (
@@ -271,4 +310,16 @@ export function entryInput(
     inputSource,
     data: categoryData(category, merged.data ?? {}),
   };
+}
+/** New meals and workouts need a title, a note of what happened, and a photo as proof. */
+export function newEntryInput(raw: unknown, user: UserIdentity): EntryContent {
+  const input = object(raw, 'entry');
+  const entry = entryInput(input, user);
+  if (entry.category === 'note') return entry;
+  if (typeof input.title !== 'string' || !input.title.trim())
+    throw new BadRequestException('title is required');
+  if (!entry.note) throw new BadRequestException('note is required');
+  if (!entry.attachments.some((a) => a.type === 'image'))
+    throw new BadRequestException('A photo is required as proof');
+  return entry;
 }

@@ -19,10 +19,17 @@ import type {
 
 const userId = '45dcf7b4-8ebd-4468-9b1c-ad85a3265c6a';
 const entryId = '923fdc43-e916-4326-bb6d-2603a9525ba0';
+const png =
+  'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=';
 const body = {
   category: 'nutrition',
+  title: 'Breakfast',
+  note: 'A bowl of rice',
   entryDate: '2026-10-05',
   occurredAt: '2026-10-05T08:15:00+05:30',
+  attachments: [
+    { id: 'photo', type: 'image', mimeType: 'image/png', base64: png },
+  ],
   data: {
     mealCategory: 'breakfast',
     items: [{ name: 'Rice', quantity: 150, unit: 'g', caloriesKcal: 195 }],
@@ -251,6 +258,14 @@ describe('product HTTP contracts', () => {
     await request(app.getHttpServer())
       .post('/v1/entries')
       .send({ ...body, data: { mealCategory: 'lunch', items: [] } })
+      .expect(400);
+    await request(app.getHttpServer())
+      .post('/v1/entries')
+      .send({ ...body, attachments: [] })
+      .expect(400);
+    await request(app.getHttpServer())
+      .post('/v1/entries')
+      .send({ ...body, note: ' ' })
       .expect(400);
     await request(app.getHttpServer())
       .get('/v1/entries?date=2026-02-30')

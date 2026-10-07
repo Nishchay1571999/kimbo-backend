@@ -26,9 +26,10 @@ without creating onboarding facts or changing the account.
 | GET | `/v1/nutrition/search?q=rice&page=1` | Normalized food search, 20 results per page; optional provider |
 | GET | `/v1/nutrition/foods/171077` | Normalized food reference; optional provider |
 | POST | `/v1/nutrition/calculate` | Portion nutrition with reference provenance |
+| POST | `/v1/estimates` | Preview calories from `{category, title, note, image}`; nothing is saved |
 | GET | `/v1/ai/models` | Enabled image-capable models from ai_models |
 | GET | `/v1/home?date=2026-10-05` | Day, schedule, summaries, goal comparison, timeline and sections |
-| GET | `/v1/home/week?date=2026-10-05` | Monday–Sunday day statuses for the week containing the date |
+| GET | `/v1/home/week?date=2026-10-05` | Day statuses for the 7 days ending on the date (capped at today) |
 | GET | `/v1/goals/target` | `{ target \| null, suggestion \| null }` |
 | PUT | `/v1/goals/target` | Confirm `{ caloriesKcal, proteinG, method }` |
 
@@ -289,3 +290,13 @@ sanitized `errorCode` (such as `AI_INSUFFICIENT_CREDITS`).
 Provider calls can use account credits. Reports contain no provider secrets:
 `docs/product-api-verification.json`, `docs/ai-model-catalog-check.json` and
 `docs/ai-live-verification.json`.
+
+## Calorie estimates
+
+`POST /v1/estimates` with `{ category: 'nutrition' | 'exercise', title, note, image: { mimeType, base64 } }` returns a preview that the app shows for confirmation before it creates the entry.
+
+- **nutrition**: the AI splits the note (and photo) into foods with estimated grams/ml. Each food is searched in USDA first (Open Food Facts first for branded items), with the other database as fallback; a second AI call picks the matching candidate. Returns `items` (FoodItems with `nutritionSource: 'reference'`, `quantitySource: 'estimated'`, plus `matchedName`, `amount`, `amountUnit`), `unmatched[{name, reason}]` and `totals`.
+- **exercise**: the AI extracts activities mapped to a MET key (`src/modules/estimates/domain/met-table.ts`); kcal = MET × latest weight (kg) × hours. Returns `activities`, `weightKg` and `totals`. Saved exercise entries use `calorieEstimationSource: 'ai_met_estimate'` and may carry `data.activities[]`.
+- Errors (422 `{code, message}`): `ESTIMATE_NO_FOOD_FOUND`, `ESTIMATE_NO_MATCH` (with `unmatched`), `ESTIMATE_NO_ACTIVITY_FOUND`, `ESTIMATE_WEIGHT_REQUIRED`; 503 `ESTIMATE_AI_UNAVAILABLE` when the model call fails.
+
+Creating a nutrition or exercise entry (`POST /v1/entries`) now requires a non-empty `title`, `note` and at least one image attachment. Home's day goal compares **net** calories (consumed − burned) with the target and adds `burned` and `netKcal`.

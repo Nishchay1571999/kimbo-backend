@@ -104,13 +104,28 @@ export class SendMessageUseCase {
       const cause = signal.aborted ? signal.reason : error;
       const errorCode =
         cause instanceof AgentError ? cause.code : 'AI_PROVIDER_ERROR';
+      // Unexpected exceptions (context, tools, persistence) were previously indistinguishable from provider failures.
+      if (!(cause instanceof AgentError))
+        this.logger.error(
+          `Chat reply failed: ${cause instanceof Error ? `${cause.name}: ${cause.message}` : String(cause)}`,
+          cause instanceof Error ? cause.stack : undefined,
+        );
+      const diagnostic =
+        cause instanceof AgentError
+          ? cause.diagnostic
+          : {
+              errorType: cause instanceof Error ? cause.name : 'UnknownError',
+              httpStatus: null,
+            };
       const status = errorCode === 'CANCELLED' ? 'cancelled' : 'failed';
       try {
         await this.chats.finish(assistant.id, {
           status,
           message: content,
           actualModelId,
-          metadata: sources.metadata(),
+          metadata: diagnostic
+            ? { ...sources.metadata(), diagnostic }
+            : sources.metadata(),
           errorCode,
         });
       } catch {

@@ -26,6 +26,15 @@ export interface ExerciseData {
   intensity: 'light' | 'moderate' | 'vigorous';
   estimatedCaloriesBurnedKcal: number | null;
   calorieEstimationSource: string | null;
+  /** Per-activity breakdown when one note described several activities. */
+  activities?: ExerciseActivity[];
+}
+export interface ExerciseActivity {
+  activityName: string;
+  durationMinutes: number;
+  intensity: 'light' | 'moderate' | 'vigorous';
+  met: number | null;
+  caloriesBurnedKcal: number;
 }
 export type EntryData = NutritionData | ExerciseData | Record<string, never>;
 export interface Attachment {
