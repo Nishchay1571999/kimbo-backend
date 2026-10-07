@@ -103,3 +103,43 @@ it('preserves cancellation and does not try fallback', async () => {
   ).rejects.toBe(reason);
   expect(callModel).toHaveBeenCalledOnce();
 });
+const unaffordable = (tokens: number) =>
+  Object.assign(
+    new Error(
+      `This request requires more credits, or fewer max_tokens. You requested up to 1000 tokens, but can only afford ${tokens}.`,
+    ),
+    { statusCode: 402 },
+  );
+it('retries the same model within the key budget when max_tokens is unaffordable', async () => {
+  callModel
+    .mockReturnValueOnce(
+      result(async function* () {
+        yield* [];
+        throw unaffordable(816);
+      }),
+    )
+    .mockReturnValueOnce(
+      result(async function* () {
+        yield 'Within budget';
+      }),
+    );
+  await provider.run(request());
+  expect(
+    callModel.mock.calls.map(([args]) => [args.model, args.maxOutputTokens]),
+  ).toEqual([
+    ['primary', 1000],
+    ['primary', 800],
+  ]);
+});
+it('reports insufficient credits when even a small reply is unaffordable', async () => {
+  callModel.mockReturnValue(
+    result(async function* () {
+      yield* [];
+      throw unaffordable(120);
+    }),
+  );
+  await expect(provider.run(request())).rejects.toMatchObject({
+    code: 'AI_INSUFFICIENT_CREDITS',
+  });
+  expect(callModel).toHaveBeenCalledOnce();
+});

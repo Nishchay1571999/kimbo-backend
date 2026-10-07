@@ -4,6 +4,15 @@ import { OpenRouter, stepCountIs, maxCost } from '@openrouter/agent';
 import type { Item } from '@openrouter/agent';
 import { AgentError } from '../domain/agent.types.js';
 import type { AgentProvider, AgentRequest } from '../domain/agent.types.js';
+/** Replies are capped at ~120 words; the budget also covers tool-call steps. */
+const MAX_OUTPUT_TOKENS = 1000;
+const MIN_OUTPUT_TOKENS = 300;
+interface Attempt {
+  model: string;
+  maxOutputTokens: number;
+  primary: boolean;
+  reduced: boolean;
+}
 @Injectable()
 export class OpenRouterAgentProvider implements AgentProvider {
   private readonly logger = new Logger(OpenRouterAgentProvider.name);
@@ -12,7 +21,16 @@ export class OpenRouterAgentProvider implements AgentProvider {
     const key = this.config.get<string>('OPENROUTER_API_KEY');
     if (!key) throw new AgentError('AI_NOT_CONFIGURED');
     const client = new OpenRouter({ apiKey: key });
-    for (const [index, model] of request.models.slice(0, 2).entries()) {
+    const attempts: Attempt[] = request.models
+      .slice(0, 2)
+      .map((model, index) => ({
+        model,
+        maxOutputTokens: MAX_OUTPUT_TOKENS,
+        primary: index === 0,
+        reduced: false,
+      }));
+    for (let index = 0; index < attempts.length; index++) {
+      const { model, maxOutputTokens, primary } = attempts[index];
       let progressed = false;
       let streamed = false;
       const result = client.callModel(
@@ -48,7 +66,7 @@ export class OpenRouterAgentProvider implements AgentProvider {
           tools: request.tools,
           signal: request.signal,
           provider: { requireParameters: true },
-          maxOutputTokens: 1500,
+          maxOutputTokens,
           stopWhen: [stepCountIs(5), maxCost(0.1)],
           allowFinalResponse:
             'Answer concisely using only confirmed retrieved facts. If the retrieval limit was reached, mention any missing information.',
@@ -90,12 +108,27 @@ export class OpenRouterAgentProvider implements AgentProvider {
                 'RequestTimeoutError',
                 'UnexpectedClientError',
               ].includes(name);
+        // A spend-limited key rejects requests whose max_tokens it cannot cover; retry once within budget.
+        const affordable =
+          status === 402 && error instanceof Error
+            ? Number(/can only afford (\d+)/.exec(error.message)?.[1])
+            : NaN;
         if (
-          index === 0 &&
-          request.models.length > 1 &&
           !progressed &&
-          transient
+          !attempts[index].reduced &&
+          affordable >= MIN_OUTPUT_TOKENS
         ) {
+          this.logger.warn(
+            `OpenRouter key can only afford ${affordable} tokens; retrying with a smaller reply budget`,
+          );
+          attempts.splice(index + 1, 0, {
+            ...attempts[index],
+            maxOutputTokens: Math.min(maxOutputTokens, affordable) - 16,
+            reduced: true,
+          });
+          continue;
+        }
+        if (primary && request.models.length > 1 && !progressed && transient) {
           this.logger.warn(
             'OpenRouter primary unavailable; trying registered fallback',
           );
